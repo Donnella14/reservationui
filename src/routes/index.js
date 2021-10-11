@@ -9,6 +9,7 @@ import Abouts from '../views/about';
 import DashMentors from "../views/dashboard/Mentors";
 import profile from '../views/profile';
 
+
 const Index=()=>{
     return(
         <Switch>
@@ -16,6 +17,7 @@ const Index=()=>{
 
         <Route component={Dashboard} path="/dashboard"/>
         <Route component={DashMentors} path="/dashmentors"/>
+       
          
         <Route component={Contacts} path="/contact"/> 
          <Route component={Abouts} path="/about"/>  

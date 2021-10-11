@@ -63,18 +63,19 @@ useEffect(() => {
     return(
       <>
       <Modal title="User Login" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-<div style={{padding:"30px"}}>
+<div style={{padding:"30px" }}>
 <SigninForm/>
 
 </div>
     </Modal>
-   <div>
-      
+   <div style={{background:"#CD853F"}}>
+        
+        <div style={{display:"flex"}}>
         <div>
         <img src={logo} alt="logo" />
           </div>
           
-          <div className="social-container">
+          <div className="social-container" style={{paddingLeft:"40px",paddingTop:"30px"}} >
           <a href="https://www.youtube.com/c/jamesqquick"
   className="youtube social">
   <FontAwesomeIcon icon={faYoutube} size="2x" />
@@ -91,6 +92,7 @@ useEffect(() => {
   <FontAwesomeIcon icon={faInstagram} size="2x" />
 </a>
       </div>
+      </div>
       <p style={{color: "#15395b", marginLeft: 300, marginTop: -50}}> {!token?(<></>):(<>{decode(token).email} </>)} </p>
        
           <Search
@@ -101,7 +103,7 @@ useEffect(() => {
     onSearch={onSearch}
    style={{color:"#15395b",width:"400px",marginLeft:"930px",padding:"0px"}}
   />
-      <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal" style={{marginLeft: 450,marginTop: -40}}>
+      <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal" style={{marginLeft: 450,marginTop: -40, background:"#CD853F"}}>
         <Menu.Item key="home" icon={<HomeOutlined />} >
    
         <Link to="/">
@@ -109,7 +111,7 @@ useEffect(() => {
         </Menu.Item>
         <Menu.Item key="mentors" icon={ <UnorderedListOutlined />} >
           <Link onClick={handleClick} to="/allmentors">
-         All Mentors</Link>
+         Available Sectors </Link>
         </Menu.Item>
         {  !token?
         (<Menu.Item key="login" onClick={showModal} icon={<LoginOutlined />}>

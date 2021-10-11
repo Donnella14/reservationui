@@ -23,7 +23,7 @@ return (
 	<h1 style={{ color: "white",
 				textAlign: "center",
 				marginTop: "-50px" }}>
-		NYAMPINGA JOSELYNE
+		GET IN TOUCH
 	</h1>
 	<Container>
 		<Row>
@@ -46,7 +46,7 @@ return (
                   {" "}
                   <GooglePlusOutlined className="arrow-icon" />{" "}
                 </strong>{" "}
-                <span> joselynenya@gmail.com</span></FooterLink>
+                <span> aaaaaa@gmail.com</span></FooterLink>
 			<FooterLink href="#"><strong>
                   {" "}
                   <PhoneOutlined className="arrow-icon" />{" "}
