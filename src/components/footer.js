@@ -35,10 +35,9 @@ return (
 		</Column>
 		<Column>
 			<Heading>Services</Heading>
-			<FooterLink href="#">MentorShip</FooterLink>
-			<FooterLink href="#">Internships</FooterLink>
-			<FooterLink href="#">Coding</FooterLink>
-			<FooterLink href="#">Teaching</FooterLink>
+			<FooterLink href="#">Registration</FooterLink>
+			<FooterLink href="#">Marriage</FooterLink>
+			
 		</Column>
 		<Column>
 			<Heading>Contact Us</Heading>
