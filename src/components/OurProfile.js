@@ -1,68 +1,127 @@
 import React from "react";
 import "./index.css";
-
-
-import {Card} from "antd";
-
-
-
+import { Card } from "antd";
 import ReactPlayer from 'react-player/lazy'
 import image1 from "../assets/5.jpg";
 import image2 from "../assets/7.jpg";
+import slide1 from "../assets/x.jpg";
+import slide2 from "../assets/y.jpg";
+import slide4 from "../assets/yy.jpg";
+import slide5 from "../assets/xxx.jpg";
 
-const Programs =()=>{
+import slide3 from "../assets/yyy.jpg";
+import { Slide } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css'
+const slideImages = [
+    slide1,
+    slide2,
+    slide3,
+    slide4,
+    slide5
+];
 
-    
-    return(
-        <div className="profile-container" >
-        <Card  style={{width:"100%"}}>
-            <Card.Grid className="ess" hoverable={false}  style={{width:"100%",padding:"100px 30px 30px 30px",border:"solid 2px white",display:"flex"}}>
-                <div >
+const properties = {
+    duration: 5000,
+    transitionDuration: 500,
+    infinite: true,
+    indicators: true,
+    arrows: true,
+    onChange: (oldIndex, newIndex) => {
+        console.log(`slide transition from ${oldIndex} to ${newIndex}`);
+    }
+}
 
-                <h1 style={{fontSize:"70px",color:"black", fontWeight:"bold",border:"white"}}> CIVIL MARRIAGE </h1>
-                <p style={{fontSize:"20px",padding:"10px",border:"solid 2px white"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempus, vel sollicitudin pulvinar. Porttitor lobortis arcu interdum neque enim.</p>
-           
-               
-                </div>
-                <div>
+const Programs = () => {
 
-    <img src={image1} alt="image" width="100%"/>
-                </div>
-            </Card.Grid>
-        </Card>
-        <Card style={{width:"100%"}}>
-            <Card.Grid hoverable={false}  style={{width:"100%",display:"flex",padding:"50px",backgroundColor:"lavenderBlush"}}>
-                <img src={image2} alt="image" width="70%"/>
-           <div>
-                <h1 style={{fontSize:"60px",color:"black", fontWeight:"bold",border:"white"}}> MARRIAGE REGISTRATION </h1>
-                <p style={{fontSize:"20px",padding:"10px",border:"white"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempus, vel sollicitudin pulvinar. Porttitor lobortis arcu interdum neque enim.</p>
-                </div>
-            </Card.Grid>
-        </Card>
-        <Card style={{width:"100%"}}>
-                <Card.Grid hoverable={false}  style={{width:"40%"}}>
-                    <h1 style={{fontSize:"60px",color:"black", fontWeight:"bold",border:"white"}}> PROCESS AND REQUIREMENTS
 
-</h1>
-                    <p style={{fontSize:"20px",padding:"10px",border:"white"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempus, vel sollicitudin pulvinar. Porttitor lobortis arcu interdum neque enim.</p>
-               
-                   
-                </Card.Grid>
-                <Card.Grid hoverable={false} style={{width:"50%"}}>
-                
-                <div className='player-wrapper'>
-        <ReactPlayer
-          className='react-player'
-          url='https://www.youtube.com/watch?v=k1eo4PrJaXc'
-          width='100%'
-         
-        />
-      </div>
-                 </Card.Grid>
-            </Card>
-       
-        </div>
+    return (
+        <>
+            <div className="slide-container" style={{ paddingTop: "30px" }}>
+                <Slide {...properties}>
+                    <div className="each-slide" style={{ width: "100%", height: "400px" }}>
+
+                        <div style={{ 'backgroundImage': `url(${slideImages[0]})`, height: "400px", width: "1800px", marginLeft: "200px", backgroundRepeat: "no-repeat " }}>
+
+                        </div>
+                    </div>
+                    <div className="each-slide" style={{ width: "100%", height: "400px" }} >
+                        <div style={{ 'backgroundImage': `url(${slideImages[1]})`, height: "400px", width: "1800px", marginLeft: "200px", backgroundRepeat: "no-repeat " }}>
+
+                        </div>
+                    </div>
+                    <div className="each-slide" style={{ width: "100%", height: "400px" }} >
+                        <div style={{ 'backgroundImage': `url(${slideImages[2]})`, height: "400px", width: "100%", marginLeft: "200px", backgroundRepeat: "no-repeat " }}>
+
+                        </div>
+                    </div>
+                    <div className="each-slide" style={{ width: "100%", height: "400px" }} >
+                        <div style={{ 'backgroundImage': `url(${slideImages[3]})`, height: "400px", width: "100%", marginLeft: "200px", backgroundRepeat: "no-repeat " }}>
+
+                        </div>
+                    </div>
+                    <div className="each-slide" style={{ width: "100%", height: "400px" }} >
+                        <div style={{ 'backgroundImage': `url(${slideImages[4]})`, height: "400px", width: "100%", marginLeft: "200px", backgroundRepeat: "no-repeat " }}>
+
+                        </div>
+                    </div>
+                </Slide>
+            </div>
+            <div className="profile-container" >
+                <Card style={{ width: "100%" }}>
+                    <Card.Grid hoverable={false} style={{ width: "100%", display: "flex", padding: "150px", backgroundColor: "#EFEFEF" }}>
+
+                        <div>
+                            <span>
+                                MarryFromHome Helps couples get legally married from the comfort of their own home, wherever they are in the world.
+                                With an online wedding ceremony hosted on Zoom, couples can enjoy an officiated marriage from the US government, regardless of their nationality, sexuality or physical location. Couples then receive a hard-copy of their US marriage certificate which can then be used as a legal document to prove their married status.
+
+                            </span>
+                        </div>
+                    </Card.Grid>
+                </Card>
+                <Card style={{ width: "100%" }}>
+                    <Card.Grid hoverable={false} style={{ width: "100%", display: "flex", padding: "250px", backgroundColor: "#" }}>
+
+                        <div>
+                      </div>
+                    </Card.Grid>
+                </Card>
+
+                <Card style={{ width: "100%" }}>
+                    <Card.Grid hoverable={false} style={{ width: "100%", display: "flex", padding: "50px", backgroundColor: "lavenderBlush" }}>
+                        <img src={image2} alt="image" width="70%" />
+                        <div>
+                            <h1 style={{ fontSize: "60px", color: "black", fontWeight: "bold", border: "white" }}> MARRIAGE REGISTRATION </h1>
+                            <p style={{ fontSize: "20px", padding: "10px", border: "white" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempus, vel sollicitudin pulvinar. Porttitor lobortis arcu interdum neque enim.</p>
+                        </div>
+                    </Card.Grid>
+                </Card>
+                <Card style={{ width: "100%" }}>
+                    <Card.Grid hoverable={false} style={{ width: "40%" }}>
+                        <h1 style={{ fontSize: "60px", color: "black", fontWeight: "bold", border: "white" }}> PROCESS AND REQUIREMENTS
+
+                        </h1>
+                        <p style={{ fontSize: "20px", padding: "10px", border: "white" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempus, vel sollicitudin pulvinar. Porttitor lobortis arcu interdum neque enim.</p>
+
+
+                    </Card.Grid>
+                    <Card.Grid hoverable={false} style={{ width: "50%" }}>
+
+                        <div className='player-wrapper'>
+                            <ReactPlayer
+                                className='react-player'
+                                url='https://www.youtube.com/watch?v=k1eo4PrJaXc'
+                                width='100%'
+
+                            />
+                        </div>
+                    </Card.Grid>
+                </Card>
+
+            </div>
+        </>
     )
+
 }
 
 export default Programs;

@@ -66,13 +66,7 @@
       top: 0;
       left: 0;
     }
-    .ess{
-      background: url('../assets/1.jpg');
-      height: 600px;
-      background-color:rgba(241, 0, 0, 0.87)
-     
-      
-    }
+   
     .grid{
      
       padding: 50px;
@@ -111,6 +105,8 @@
 
   
       }
+      
 
-    }
+
+}
    
