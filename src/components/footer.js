@@ -29,38 +29,38 @@ return (
 		<Row>
 		<Column>
 			<Heading>About Us</Heading>
-			<FooterLink href="#">Mission</FooterLink>
-			<FooterLink href="#">Vision</FooterLink>
-			<FooterLink href="#">Testimonials</FooterLink>
+			<FooterLink href="#"style={{color:"white"}} >Mission</FooterLink>
+			<FooterLink href="#" style={{color:"white"}}>Vision</FooterLink>
+			<FooterLink href="#"style={{color:"white"}} >Testimonials</FooterLink>
 		</Column>
 		<Column>
 			<Heading>Services</Heading>
-			<FooterLink href="#">Registration</FooterLink>
-			<FooterLink href="#">Marriage</FooterLink>
+			<FooterLink href="#"style={{color:"white"}}>Registration</FooterLink>
+			<FooterLink href="#"style={{color:"white"}}>Marriage</FooterLink>
 			
 		</Column>
 		<Column>
 			<Heading>Contact Us</Heading>
-			<FooterLink href="#"><strong>
+			<FooterLink href="#"style={{color:"white"}} ><strong>
                   {" "}
                   <GooglePlusOutlined className="arrow-icon" />{" "}
                 </strong>{" "}
-                <span> aaaaaa@gmail.com</span></FooterLink>
-			<FooterLink href="#"><strong>
+                <span > aaaaaa@gmail.com</span></FooterLink>
+			<FooterLink href="#" style={{color:"white"}}><strong>
                   {" "}
                   <PhoneOutlined className="arrow-icon" />{" "}
                 </strong>{" "}
-                <span> +250 788 642 652</span></FooterLink>
-			<FooterLink href="#"><strong>
+                <span > +250 788 642 652</span></FooterLink>
+			<FooterLink href="#" style={{color:"white"}}><strong>
                   {" "}
                   <AimOutlined className="arrow-icon" />{" "}
                 </strong>{" "}
-                <span> Rwanda / Kigali City</span></FooterLink>
+                <span style={{color:"white"}}> Rwanda / Kigali City</span></FooterLink>
 			
 		</Column>
 		<Column>
 			<Heading>Social Media</Heading>
-			<FooterLink href="#">
+			<FooterLink href="#" style={{color:"white"}}>
 			<i className="fab fa-facebook-f"><strong>
                   {" "}
                   <FacebookOutlined className="arrow-icon" />{" "}
@@ -70,7 +70,7 @@ return (
 				</span>
 			</i>
 			</FooterLink>
-			<FooterLink href="#">
+			<FooterLink href="#"style={{color:"white"}} >
 			<i className="fab fa-instagram"><strong>
                   {" "}
                   <InstagramOutlined className="arrow-icon" />{" "}
@@ -80,7 +80,7 @@ return (
 				</span>
 			</i>
 			</FooterLink>
-			<FooterLink href="#">
+			<FooterLink href="#"style={{color:"white"}} >
 			<i className="fab fa-twitter"><strong>
                   {" "}
                   <TwitterOutlined className="arrow-icon" />{" "}
@@ -90,12 +90,12 @@ return (
 				</span>
 			</i>
 			</FooterLink>
-			<FooterLink href="#">
+			<FooterLink href="#"style={{color:"white"}} >
 			<i className="fab fa-youtube"><strong>
                   {" "}
                   <YoutubeOutlined className="arrow-icon" />{" "}
                 </strong>{" "}
-				<span style={{ marginLeft: "10px" }}>
+				<span style={{ marginLeft: "10px",  }}>
 				Youtube
 				</span>
 			</i>
