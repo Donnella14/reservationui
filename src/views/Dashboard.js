@@ -18,7 +18,7 @@ import { Modal,Tag,Space, Button,Table,Drawer,notification} from 'antd';
 const Dashboard = () => {
 
 
-  const token = localStorage.getItem("freeMentor_token");
+  const token = localStorage.getItem("civil_token");
   const [session, setSession] = useState({});
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -52,11 +52,11 @@ const Dashboard = () => {
           render: text => <a>{text}</a>,
       },
       {
-          title: 'Mentor',
-          dataIndex: 'mentor',
-          key: 'mentor',
+          title: 'Sector',
+          dataIndex: 'sector',
+          key: 'sector',
 
-          render: mentor => <a>{mentor.firstName}  {mentor.lastName} </a>,
+          render: sector => <a>{sector.sectorName} </a>,
       },
       {
           title: 'Start Time',
@@ -123,9 +123,9 @@ const Dashboard = () => {
 
 
   useEffect(() => {
-      SessionAPI.getAllSession(dataFromToken(token).id).then((response) => {
+      SessionAPI.getAllSector(dataFromToken(token)).then((response) => {
 
-          // console.log(response.data.data) ;
+         // console.log(response.data.data) ;
           setData(response.data.data);
 
       });
@@ -135,11 +135,10 @@ const Dashboard = () => {
       <>
           <DashboardLayout>
 
-              {dataFromToken(token).role=="mentor"? (<></>): (<Button onClick={showModal}>Create Session</Button>)}
-
+            
               <Table columns={columns} dataSource={data} />
 
-              <Modal title="New Session" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+              <Modal title="New Sector" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                   <div style={{ padding: "30px" }}>
                       <Session />
 

@@ -28,7 +28,7 @@ function onSearch(val) {
   
 
 const Session =()=>{
-  const [mentors,setMentors]=useState([]);
+  const [sectors,setSectors]=useState([]);
   const history = useHistory();
 
   const onFinish = async(values) => {
@@ -56,8 +56,8 @@ return notification.error({message:response.data.message})
 
   
 useEffect(() => {
-  AuthApi.getAllMentors().then((res)=>{setMentors(res.data.data)});
-  },[mentors])
+  AuthApi.getAllSectors().then((res)=>{setSectors(res.data.data)});
+  },[sectors])
 
     return (
       <Form 
@@ -73,96 +73,71 @@ useEffect(() => {
   
             <Form.Item style={{ marginBottom: 0 }}>
           <Form.Item
-           name="title"
-           label="Title"
+           name="sectorname"
+           label="SectorName"
            style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
            tooltip="What do you want others to call you?"
            rules={[
              {
                required: true,
-               message: 'Please input your title!',
+               message: 'Please input your sectorname!',
                whitespace: true,
              },
            ]}
           >
-            <Input  placeholder="title" />
+            <Input  placeholder="Sectorname" />
           </Form.Item>
           <Form.Item
-            name="description"
-            label="Description"
+            name="email"
+            label="Email"
             style={{ display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px' }}
             tooltip="What do you want others to call you?"
             rules={[
               {
                 required: true,
-                message: 'Please input your description!',
+                message: 'Please input your email!',
                 whitespace: true,
               },
             ]}
           >
-           <Input  placeholder="description" />
+           <Input  placeholder="email" />
             
           </Form.Item>
         </Form.Item>
-            <Form.Item style={{ marginBottom: 0 }}>
-            
-          
-         <Form.Item label="Select Mentor"name="mentor"
-         >
-
-<Select
-                    showSearch
-                    style={{ width: 200 }}
-                    placeholder="Select a person"
-                    optionFilterProp="children"
-                    onChange={onChange}
-                    onFocus={onFocus}
-                    onBlur={onBlur}
-                    onSearch={onSearch}
-                    filterOption={(input, option) =>
-                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                >
-                    {
-                        mentors.map((mentor) => (
-                            <Option value={mentor._id}>{mentor.firstName} {mentor.lastName} </Option>
-                        ))
-                    }
-
-
-                </Select>
-            </Form.Item>
-            </Form.Item>
-            
-<Form.Item style={{ marginBottom: 0 }}>
-    
+        <Form.Item style={{ marginBottom: 0 }}>
           <Form.Item
-          name="timeToStart"
-          label="TimeToStart"
-          style={{  display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px'  }}
-          rules={[{ required: true, message: 'Please input your starting time!' }]}
-        >
-          <DatePicker />
+           name="phone"
+           label="PhoneNumber"
+           style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
+           tooltip="What do you want others to call you?"
+           rules={[
+             {
+               required: true,
+               message: 'Please input your phone!',
+               whitespace: true,
+             },
+           ]}
+          >
+            <Input  placeholder="PhoneNumber" />
           </Form.Item>
-          
-          
           <Form.Item
-          name="timeToEnd"
-          label="TimeToEnd"
-          style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
-          rules={[{ required: true, message: 'Please input your ending time!' }]}
-        >
-          <DatePicker />
+            name="address"
+            label="Address"
+            style={{ display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px' }}
+            tooltip="What do you want others to call you?"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your address!',
+                whitespace: true,
+              },
+            ]}
+          >
+           <Input  placeholder="address" />
+            
+          </Form.Item>
         </Form.Item>
-  </Form.Item>
-       <Form.Item style={{ marginBottom: 0 }}>
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Create Session
-          </Button>
-         
-        </Form.Item>
-        </Form.Item>
+  
         </Col>
           </Row>
       </Form>

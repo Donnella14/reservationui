@@ -1,14 +1,14 @@
 import React from "react";
 
 import DashboardLayout from "../../components/DashboardLayout";
-import Mentors from "../../components/Mentors";
+import Sectors from "../../components/Sectors";
 
-const DashMentors =()=>{
+const DashSectors =()=>{
 return(
     <DashboardLayout>
-        <Mentors/>
+        <Sectors/>
 
     </DashboardLayout>
 )
 }
-export default DashMentors;
+export default DashSectors;

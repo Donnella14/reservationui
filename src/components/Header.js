@@ -7,7 +7,7 @@ import 'antd/dist/antd.css';
 import {Link} from "react-router-dom";
 import decode from "../utils/tokenDecorder";
 import SigninForm from "./SigninForm";
-import logo from "../assets/logo.png";
+import logo from "../assets/dove.png";
 import { UnorderedListOutlined,AudioOutlined,AntDesignOutlined,ContactsOutlined, HomeOutlined, LoginOutlined} from '@ant-design/icons';
 import {
   faYoutube,
@@ -57,7 +57,7 @@ const Header = ()=>{
     setCurrent(e.key);
   };
 useEffect(() => {
-    setToken( localStorage.getItem("freeMentor_token"));
+    setToken( localStorage.getItem("civil_token"));
    
    })
     return(
@@ -95,37 +95,32 @@ useEffect(() => {
       </div>
       <p style={{color: "#15395b", marginLeft: 300, marginTop: -50}}> {!token?(<></>):(<>{decode(token).email} </>)} </p>
        
-          <Search
-    placeholder="Search mentor"
-    enterButton="Search"
-    size="large"
-    suffix={suffix}
-    onSearch={onSearch}
-   style={{color:"#15395b",width:"400px",marginLeft:"930px",padding:"0px"}}
-  />
+     
       <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal" style={{marginLeft: 450,marginTop: -40, background:"#CD853F"}}>
         <Menu.Item key="home" icon={<HomeOutlined />} >
    
         <Link to="/">
          Home</Link>
         </Menu.Item>
-        <Menu.Item key="mentors" icon={ <UnorderedListOutlined />} >
-          <Link onClick={handleClick} to="/allmentors">
+        <Menu.Item key="sectors" icon={ <UnorderedListOutlined />} >
+          <Link onClick={handleClick} to="/allsectors">
          Available Sectors </Link>
         </Menu.Item>
-        {  !token?
-        (<Menu.Item key="login" onClick={showModal} icon={<LoginOutlined />}>
-         Login
-        </Menu.Item>):
-        (<Menu.Item key="logout" onClick={()=>{localStorage.removeItem("freeMentor_token")}}>
-        <Link to="/home">Logout</Link>
         
-        </Menu.Item>)}
         <Menu.Item key="dashboard"  icon={<AntDesignOutlined />}>
 
         <Link onClick={handleClick}  to="/dashboard"  >
          Dashboard</Link>
         </Menu.Item>
+
+        {  !token?
+        (<Menu.Item key="login" onClick={showModal} icon={<LoginOutlined />}>
+         Login
+        </Menu.Item>):
+        (<Menu.Item key="logout" onClick={()=>{localStorage.removeItem("civil_token")}}>
+        <Link to="/home">Logout</Link>
+        
+        </Menu.Item>)}
       </Menu>
       </div>
        </>
