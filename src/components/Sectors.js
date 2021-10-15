@@ -4,7 +4,6 @@ import 'antd/dist/antd.css';
 import { List, Avatar, Space } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 
-//import allMentors from "../assets/constants/mentors.json";
 import avatar from "../assets/ava.jpg";
 import a from "../assets/a.jpg";
 
@@ -18,11 +17,11 @@ const IconText = ({ icon, text }) => (
     </Space>
   );
 
-const Mentors =()=>{
-  const [allMentors,setAllMentors] =useState([]);
+const Sectors =()=>{
+  const [allSectors,setAllSectors] =useState([]);
 
   useEffect(() => {
-    AuthApi.getAllMentors().then((res)=>{setAllMentors(res.data.data)});
+    AuthApi.getAllSectors().then((res)=>{setAllSectors(res.data.data)});
   },[])
 
     return(
@@ -36,7 +35,7 @@ const Mentors =()=>{
       },
       pageSize: 1,
     }}
-    dataSource={allMentors}
+    dataSource={allSectors}
     footer={
       <div>
         <b>@Copy Right2021 </b>
@@ -70,4 +69,4 @@ const Mentors =()=>{
 </Card>
     )
 }
-export default Mentors;
+export default Sectors;

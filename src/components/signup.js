@@ -3,7 +3,7 @@ import { Link,useHistory } from "react-router-dom";
 import "./index.css";
 import Auth from "../services/Auth";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { Form, Input, notification, Select, Row, Col, Button, InputNumber } from 'antd';
+import { Form, Input, notification, Select, Row, Col, Button, InputNumber,DatePicker } from 'antd';
 const { Option } = Select;
 
 
@@ -23,7 +23,7 @@ const RegistrationForm = () => {
   }
   if(response.data.status===200){
 notification.success({message:response.data.message});
-localStorage.setItem("freeMentor_token",response.data.token);
+localStorage.setItem("civil_token",response.data.token);
     return history.push("/dashboard")
   }
   else{
@@ -99,28 +99,38 @@ return notification.error({message:response.data.message})
       
         </Form.Item>
         <Form.Item
-        name="password"
-        label="Password"
-        style={{  display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px'  }}
-        rules={[{ required: true, message: 'Please input your Password!' }]}
-      >
-        <Input.Password
-        />
+        name="id"
+        label="NationalID"
+       style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
+      > <Input  style={{ width: '100%' }} />
+        
         </Form.Item>
         </Form.Item>
         <Form.Item style={{ marginBottom: 0 }}>
        
         <Form.Item
+        name="password"
+        label="Password"
+        style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
+        rules={[{ required: true, message: 'Please input your password!',max:10  }]}
+       
+      >
+       <Input.Password
+        />
+      </Form.Item>
+      <Form.Item
         name="phone"
         label="Phone Number"
-        style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
-        rules={[{ required: true, message: 'Please input your phone number!',max:10 }]}
-      >
-        <Input  style={{ width: '100%' }} />
+        style={{  display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px'  }}
+        rules={[{ required: true, message: 'Please input your phone!',whitespace:true }]}
+      > <Input  style={{ width: '100%' }} />
+        
+        </Form.Item>
+         
       </Form.Item>
-
-          <Form.Item
-          style={{  display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px'  }}
+      <Form.Item style={{ marginBottom: 0 }}>
+      <Form.Item
+          style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
           name="gender"
           label="Gender"
           rules={[
@@ -137,10 +147,36 @@ return notification.error({message:response.data.message})
           </Select>
          
         </Form.Item>
-      </Form.Item>
-      <Form.Item name="age" label="Age" rules={[{ type: 'number', min: 0, max: 99 }]}>
-        <InputNumber />
-      </Form.Item>
+        <Form.Item
+        name="age"
+        label="Age"
+        style={{  display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px'  }}
+        rules={[{ required: true, message: 'Please input your age!', whitespace:true }]}
+        
+      > <InputNumber  style={{ width: '100%' }} />
+        
+        </Form.Item>
+        </Form.Item>
+        <Form.Item style={{ marginBottom: 0 }}>
+    
+    <Form.Item
+    name="registeredDate"
+    label="RegisteredOn"
+    style={{  display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px'  }}
+    rules={[{ required: true, message: 'Please input your registered time!' }]}
+  >
+    <DatePicker />
+    </Form.Item>
+    
+    
+    <Form.Item
+    name="Address"
+    label="Address"
+    style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
+    rules={[{ required: true, message: 'Please input your address!', whitespace:true }]}
+    > <Input  style={{ width: '100%' }} />
+  </Form.Item>
+</Form.Item>
     
      <Form.Item style={{ marginBottom: 0 }}>
       <Form.Item>

@@ -15,7 +15,7 @@ const SigninForm = () => {
   }
   if(response.data.status===200){
 notification.success({message:response.data.message});
-localStorage.setItem("freeMentor_token",response.data.token);
+localStorage.setItem("civil_token",response.data.token);
      history.push("/dashboard")
     return window.location.reload();
   }
@@ -33,10 +33,10 @@ return notification.error({message:response.data.message})
       onFinish={onFinish}
     >
       <Form.Item
-        name="email"
-        rules={[{ required: true, message: 'Please input your Email!' }]}
+        name="Phone Number"
+        rules={[{ required: true, message: 'Please input your Phone!' }]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
+        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="phone" />
       </Form.Item>
       <Form.Item
         name="password"

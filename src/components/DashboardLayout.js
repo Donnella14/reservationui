@@ -73,14 +73,14 @@ const DashboardLayout =({children})=> {
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
           
             <Menu.Item key="1" icon={<UserOutlined />}>
-                <Link to="/dashboard">   Sessions      </Link>
+                <Link to="/dashboard">   Sector      </Link>
               
             </Menu.Item>
             <Menu.Item key="5" icon={<CaretRightOutlined />}>
             <Link onClick={handleClick} to="/about">About Us</Link>
             </Menu.Item>
             <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-                <Link to="/dashmentors">   All Sectors      </Link>
+                <Link to="/dashsectors">   All Sectors      </Link>
            
             </Menu.Item>
             <Menu.Item key="6" icon={<VideoCameraOutlined />}>

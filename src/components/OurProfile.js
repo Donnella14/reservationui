@@ -1,23 +1,28 @@
 import React from "react";
 import "./index.css";
-import { Card } from "antd";
+import { Card, Col, Row,Title,Subtitle,Body } from "antd";
 import ReactPlayer from 'react-player/lazy'
 import image1 from "../assets/5.jpg";
 import image2 from "../assets/7.jpg";
-import slide1 from "../assets/x.jpg";
-import slide2 from "../assets/y.jpg";
-import slide4 from "../assets/yy.jpg";
-import slide5 from "../assets/xxx.jpg";
+import slide1 from "../assets/q1.jpg";
+import slide2 from "../assets/q2.jpg";
+import slide4 from "../assets/q3.jpg";
+import slide5 from "../assets/q4.jpg";
 
-import slide3 from "../assets/yyy.jpg";
+import slide6 from "../assets/q33.jpg";
+import slide7 from "../assets/q24.jpg";
+import slide8 from "../assets/q9.jpg";
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
 const slideImages = [
     slide1,
     slide2,
-    slide3,
+    slide6,
     slide4,
-    slide5
+    slide5,
+    slide7,
+    slide8
+
 ];
 
 const properties = {
@@ -64,6 +69,22 @@ const Programs = () => {
 
                         </div>
                     </div>
+                    <div className="each-slide" style={{ width: "100%", height: "400px" }} >
+                        <div style={{ 'backgroundImage': `url(${slideImages[5]})`, height: "400px", width: "100%", marginLeft: "200px", backgroundRepeat: "no-repeat " }}>
+
+                        </div>
+                    </div>
+                    <div className="each-slide" style={{ width: "100%", height: "400px" }} >
+                        <div style={{ 'backgroundImage': `url(${slideImages[6]})`, height: "400px", width: "100%", marginLeft: "200px", backgroundRepeat: "no-repeat " }}>
+
+                        </div>
+                    </div>
+                    <div className="each-slide" style={{ width: "100%", height: "400px" }} >
+                        <div style={{ 'backgroundImage': `url(${slideImages[7]})`, height: "400px", width: "100%", marginLeft: "200px", backgroundRepeat: "no-repeat " }}>
+
+                        </div>
+                    </div>
+
                 </Slide>
             </div>
             <div className="profile-container" >
@@ -79,13 +100,28 @@ const Programs = () => {
                         </div>
                     </Card.Grid>
                 </Card>
-                <Card style={{ width: "100%" }}>
-                    <Card.Grid hoverable={false} style={{ width: "100%", display: "flex", padding: "250px", backgroundColor: "#" }}>
+                <Card style={{ width: "100%", backgroundColor: "#faad14" }}>
 
-                        <div>
-                      </div>
+                    <Card.Grid hoverable={false} style={{ width: "100%", display: "flex", padding: "250px", backgroundColor: "#" }}>
+                        <span style={{ color: "#422510", font: "23px sans-serif", marginTop: "-200px", width:"100%"}}>
+                            YOUR LOVE KNOWS NO BOUNDS. NOW YOUR MARRIAGE CAN TOO.
+                        </span>
+                        <Card style={{ width: '18rem' }}>
+  <Card>
+    
+    <Card.Grid>
+      Some quick example text to build on the card title and make up the bulk of
+      the card's content.
+    </Card.Grid>
+    
+  </Card >
+</Card>
                     </Card.Grid>
-                </Card>
+                    
+                
+
+       
+</Card>
 
                 <Card style={{ width: "100%" }}>
                     <Card.Grid hoverable={false} style={{ width: "100%", display: "flex", padding: "50px", backgroundColor: "lavenderBlush" }}>

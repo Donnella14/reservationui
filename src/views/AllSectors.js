@@ -3,17 +3,16 @@ import React from "react";
 import {Card} from "antd";
 
 import Header from "../components/Header";
-import Mentors from "../components/Mentors";
-import Footer from "../components/footer";
+import Sectors from "../components/Sectors";
 
-const AllMentors =()=>{
+const AllSectors =()=>{
     return(
         <>
         <Header/>
-        <Mentors/>
+        <Sectors/>
        
         </>
     )
 }
 
-export default AllMentors;
+export default AllSectors;
