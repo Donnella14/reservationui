@@ -84,11 +84,11 @@ const DashboardLayout =({children})=> {
            
             </Menu.Item>
             <Menu.Item key="6" icon={<VideoCameraOutlined />}>
-                <Link to="/">   All Appointments      </Link>
+                <Link to="/appointments">   All Appointments      </Link>
            
             </Menu.Item>
             <Menu.Item key="7" icon={<VideoCameraOutlined />}>
-                <Link to="/">   All Scheduler      </Link>
+                <Link to="/schedulers">   All Scheduler      </Link>
            
             </Menu.Item>
             <Menu.Item key="3" icon={<UploadOutlined />}>

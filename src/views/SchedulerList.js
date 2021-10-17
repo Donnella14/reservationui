@@ -2,9 +2,9 @@ import React,{useEffect, useState} from "react";
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 
-import SectorApi from "../services/SectorAuth";
-import Session from "../components/SectorCreation";
+import SchedulerApi from "../services/SchedulerAuth";
 
+import SchedulerSession from "../components/schedulerCreation";
 import DashboardLayout from "../components/DashboardLayout";
 import dataFromToken from "../utils/tokenDecorder";
 import UserProfile from "../components/UserProfile";
@@ -15,11 +15,11 @@ import { Modal,Tag,Space, Button,Table,Drawer,notification} from 'antd';
 
 
 
-const Dashboard = () => {
+const SchedulerList = () => {
 
 
   const token = localStorage.getItem("civil_token");
-  const [session, setSession] = useState({});
+  const [scheduler, setScheduler] = useState({});
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const [data, setData] = useState([]);
@@ -46,40 +46,41 @@ const Dashboard = () => {
 
   const columns = [
       {
-          title: 'Sector Name',
-          dataIndex: 'sectorName',
-          key: 'sectorName',
+          title: 'Services Name',
+          dataIndex: 'services',
+          key: 'services',
           render: text => <a>{text}</a>,
       },
+     
       {
-        title: 'sectorName',
-        dataIndex: 'employee',
-        key: 'employee',
-        
-     render: employee => <a>{employee.phone} </a>,
-    },
-      {
-          title: 'Email',
-          dataIndex: 'email',
-          key: 'email',
+          title: 'sectorName',
+          dataIndex: 'sector',
+          key: 'sector',
+        render: sector => <a>{sector.sectorName} </a>,
       },
       {
-          title: 'Phone Number',
-          dataIndex: 'phone',
-          key: 'phone',
+          title: 'Date',
+          dataIndex: 'date',
+          key: 'date',
       },
       {
-          title: 'Address',
-          key: 'address',
-          dataIndex: 'address',
+          title: 'Time to Start',
+          key: 'timeToStart',
+          dataIndex: 'timeToStart',
          
       },
+      {
+        title: 'Time to End',
+        key: 'timeToEnd',
+        dataIndex: 'timeToEnd',
+       
+    },
      
   ];
 
 
   useEffect(() => {
-      SectorApi.getAllSectors(dataFromToken(token)).then((response) => {
+      SchedulerApi.getAllSchedulers(dataFromToken(token)).then((response) => {
 
          // console.log(response.data.data) ;
           setData(response.data.data);
@@ -91,13 +92,14 @@ const Dashboard = () => {
       <>
           <DashboardLayout>
 
-           {dataFromToken(token).role=="user"? (<></>) : dataFromToken(token).role=="Employee"? (<></>): (<Button onClick={showModal}>Create Sector</Button>)} 
+          {dataFromToken(token).role=="user"? (<></>) : dataFromToken(token).role=="admin"? (<></>):  (<Button onClick={showModal}>Create Scheduler</Button>)}
 
 <Table columns={columns} dataSource={data} />
 
-<Modal title="New Sector" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+<Modal title="New Scheduler" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
     <div style={{ padding: "30px" }}>
-        <Session />
+        <SchedulerSession/>
+        
 
     </div>
 </Modal>
@@ -115,10 +117,10 @@ const Dashboard = () => {
                 onClose={onClose}
                 visible={visible}
             >
-                <UserProfile session={session} />
+                <UserProfile session={scheduler} />
             </Drawer>
         </>
     )
 }
 
-export default Dashboard;
+export default SchedulerList;

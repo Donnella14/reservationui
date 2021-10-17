@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const CIVIL_API_SESSION= "https://civilmarriage-api.herokuapp.com/civil/v1/sector";
+// const CIVIL_API_SESSION= "https://civilmarriage-api.herokuapp.com/civil/v1/sector";
+const CIVIL_API_APPOINTMENT="http://localhost:4041/civil/v1/appointment";
 const token=localStorage.getItem("civil_token");
 
 const config={
@@ -9,12 +10,12 @@ const config={
         'x-auth-token':token
     }
 }
-class SessionApi{
+class AppointmentApi{
 
-    async createsector(data){
+    async createappointment(data){
 
         try {
-            const res= await axios.post(CIVIL_API_SESSION+"/create",data,config);
+            const res= await axios.post(CIVIL_API_APPOINTMENT+"/create",data,config);
             return res;
         } catch (error) {
             console.log(error.response);
@@ -23,10 +24,10 @@ class SessionApi{
 
     }
 
-    async getAllSector(){
+    async getAllAppontments(){
 
         try {
-            const res= await axios.get(CIVIL_API_SESSION+"/all",config);
+            const res= await axios.get(CIVIL_API_APPOINTMENT+"/all",config);
             return res;
         } catch (error) {
             console.log(error.response);
@@ -38,4 +39,4 @@ class SessionApi{
 
 }
 
-export default new SessionApi();
+export default new AppointmentApi();

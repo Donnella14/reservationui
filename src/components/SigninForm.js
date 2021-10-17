@@ -33,7 +33,7 @@ return notification.error({message:response.data.message})
       onFinish={onFinish}
     >
       <Form.Item
-        name="Phone Number"
+        name="email"
         rules={[{ required: true, message: 'Please input your Phone!' }]}
       >
         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="phone" />
