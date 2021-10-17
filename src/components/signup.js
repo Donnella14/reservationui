@@ -14,7 +14,7 @@ const RegistrationForm = () => {
 
   const onFinish = async(values) => {
   console.log('Received values of form: ', values);
-  const response= await Auth.signUp(values);
+  const response= await Auth.signup(values);
   
   console.log("response:" ,response);
   if(!response){
@@ -98,13 +98,9 @@ return notification.error({message:response.data.message})
        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="abcd@gmail.com" />
       
         </Form.Item>
-        <Form.Item
-        name="id"
-        label="NationalID"
-       style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
-      > <Input  style={{ width: '100%' }} />
-        
-        </Form.Item>
+        <Form.Item name= 'nationalId' label="NationalID" >
+        <Input />
+      </Form.Item>
         </Form.Item>
         <Form.Item style={{ marginBottom: 0 }}>
        
@@ -118,14 +114,10 @@ return notification.error({message:response.data.message})
        <Input.Password
         />
       </Form.Item>
-      <Form.Item
-        name="phone"
-        label="Phone Number"
-        style={{  display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px'  }}
-        rules={[{ required: true, message: 'Please input your phone!',whitespace:true }]}
-      > <Input  style={{ width: '100%' }} />
-        
-        </Form.Item>
+     
+      <Form.Item name="phone" label="phoneNumber" rules={[{ type: 'number' }]}>
+        <InputNumber />
+      </Form.Item>
          
       </Form.Item>
       <Form.Item style={{ marginBottom: 0 }}>
@@ -147,15 +139,11 @@ return notification.error({message:response.data.message})
           </Select>
          
         </Form.Item>
-        <Form.Item
-        name="age"
-        label="Age"
-        style={{  display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px'  }}
-        rules={[{ required: true, message: 'Please input your age!', whitespace:true }]}
-        
-      > <InputNumber  style={{ width: '100%' }} />
-        
-        </Form.Item>
+       
+      <Form.Item name= 'age' label="Age" rules={[{ type: 'number', min: 0, max: 99 }]}>
+        <InputNumber />
+      </Form.Item>
+
         </Form.Item>
         <Form.Item style={{ marginBottom: 0 }}>
     
@@ -170,12 +158,19 @@ return notification.error({message:response.data.message})
     
     
     <Form.Item
-    name="Address"
-    label="Address"
-    style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
-    rules={[{ required: true, message: 'Please input your address!', whitespace:true }]}
-    > <Input  style={{ width: '100%' }} />
-  </Form.Item>
+                name="address"
+                label="address"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Shyiramo amazina yawe neza.',
+                    },
+                ]}
+            >
+                <Input
+                    placeholder="Eg: Karemera Lucas" />
+            </Form.Item>
+
 </Form.Item>
     
      <Form.Item style={{ marginBottom: 0 }}>

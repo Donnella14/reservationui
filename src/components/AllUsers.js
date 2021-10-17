@@ -10,6 +10,7 @@ import a from "../assets/a.jpg";
 
 import AuthApi from "../services/Auth";
 
+
 const IconText = ({ icon, text }) => (
     <Space>
       {React.createElement(icon)}
@@ -17,11 +18,11 @@ const IconText = ({ icon, text }) => (
     </Space>
   );
 
-const Sectors =()=>{
-  const [allSectors,setAllSectors] =useState([]);
+const Users =()=>{
+  const [allusers,setAllusers] =useState([]);
 
   useEffect(() => {
-    AuthApi.getAllSectors().then((res)=>{setAllSectors(res.data.data)});
+    AuthApi.getAllUsers().then((res)=>{setAllusers(res.data.data)});
   },[])
 
     return(
@@ -35,7 +36,7 @@ const Sectors =()=>{
       },
       pageSize: 1,
     }}
-    dataSource={allSectors}
+    dataSource={allusers}
     footer={
       <div>
         <b>@Copy Right2021 </b>
@@ -69,4 +70,4 @@ const Sectors =()=>{
 </Card>
     )
 }
-export default Sectors;
+export default Users;

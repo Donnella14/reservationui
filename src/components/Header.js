@@ -93,7 +93,7 @@ useEffect(() => {
 </a>
       </div>
       </div>
-      <p style={{color: "#15395b", marginLeft: 300, marginTop: -50}}> {!token?(<></>):(<>{decode(token).email} </>)} </p>
+      <p style={{color: "#15395b", marginLeft: 1000, marginTop: -40}}> {!token?(<></>):(<>{decode(token).firstName}{decode(token).lastName} </>)} </p>
        
      
       <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal" style={{marginLeft: 450,marginTop: -40, background:"#CD853F"}}>

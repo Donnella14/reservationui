@@ -1,9 +1,10 @@
 import React,{useState, useEffect } from 'react';
-import AuthApi from "../services/Auth"; 
+
 import { Form, Modal, Input, Table, Button, Select, DatePicker,Row,Col,notification} from 'antd';
 import {useHistory} from "react-router-dom";
  
-  import SessionApi from '../services/Session';
+  import AuthApi from '../services/Auth';
+import SectorApi from  '../services/SectorAuth';
 
 
 const { Option } = Select;
@@ -27,12 +28,13 @@ function onSearch(val) {
  
   
 
-const Session =()=>{
-  const [sectors,setSectors]=useState([]);
+const SectorCreation =()=>{
+
+  const [employees,setEmployees]=useState([]);
   const history = useHistory();
 
   const onFinish = async(values) => {
-  const response= await SessionApi.createsession(values);
+  const response= await SectorApi.createsector(values);
   console.log("response:" ,response);
   if(!response){
     return notification.error({message:"request failed,Network error"})
@@ -56,8 +58,8 @@ return notification.error({message:response.data.message})
 
   
 useEffect(() => {
-  AuthApi.getAllSectors().then((res)=>{setSectors(res.data.data)});
-  },[sectors])
+  AuthApi.getAllUsers().then((res)=>{setEmployees(res.data.data)});
+  },[employees])
 
     return (
       <Form 
@@ -73,7 +75,7 @@ useEffect(() => {
   
             <Form.Item style={{ marginBottom: 0 }}>
           <Form.Item
-           name="sectorname"
+           name="sectorName"
            label="SectorName"
            style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
            tooltip="What do you want others to call you?"
@@ -87,6 +89,35 @@ useEffect(() => {
           >
             <Input  placeholder="Sectorname" />
           </Form.Item>
+
+            
+         <Form.Item label="Select Employee"name="employee"
+         >
+
+<Select
+                    showSearch
+                    style={{ width: 200 }}
+                    placeholder="Select a person"
+                    optionFilterProp="children"
+                    onChange={onChange}
+                    onFocus={onFocus}
+                    onBlur={onBlur}
+                    onSearch={onSearch}
+                    filterOption={(input, option) =>
+                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
+                >
+                    {
+                        employees.map((employee) => (
+                            <Option value={employee._id}>{employee.firstName} {employee.lastName} </Option>
+                        ))
+                    }
+
+
+                </Select>
+            </Form.Item>
+            </Form.Item>
+            
           <Form.Item
             name="email"
             label="Email"
@@ -103,7 +134,7 @@ useEffect(() => {
            <Input  placeholder="email" />
             
           </Form.Item>
-        </Form.Item>
+        
         <Form.Item style={{ marginBottom: 0 }}>
           <Form.Item
            name="phone"
@@ -137,11 +168,18 @@ useEffect(() => {
             
           </Form.Item>
         </Form.Item>
-  
+        <Form.Item style={{ marginBottom: 0 }}>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Create Sector
+          </Button>
+         
+        </Form.Item>
+        </Form.Item>
         </Col>
           </Row>
       </Form>
        )
 }
 
-export default Session;
+export default SectorCreation;
