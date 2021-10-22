@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 
 import SectorApi from "../services/SectorAuth";
 import Session from "../components/SectorCreation";
-
+import AuthApi from  "../services/Auth";
 import DashboardLayout from "../components/DashboardLayout";
 import dataFromToken from "../utils/tokenDecorder";
 import UserProfile from "../components/UserProfile";
@@ -52,11 +52,12 @@ const Dashboard = () => {
           render: text => <a>{text}</a>,
       },
       {
-        title: 'sectorName',
-        dataIndex: 'employee',
-        key: 'employee',
+        title: 'EmployeeName',
+        dataIndex: 'Employee',
+        key: 'Employee',
         
-     render: employee => <a>{employee.phone} </a>,
+        render: Employee => <a>{Employee.firstName}  {Employee.lastName}</a>,
+    
     },
       {
           title: 'Email',
@@ -78,15 +79,27 @@ const Dashboard = () => {
   ];
 
 
+//   useEffect(() => {
+//       SectorApi.getAllSectorUser(dataFromToken(token)).then((response) => {
+
+//           //console.log(response.data.data) ;
+//           setData(response.data.data);
+
+//       });
+
+//   },[]);
+
+
   useEffect(() => {
-      SectorApi.getAllSectors(dataFromToken(token)).then((response) => {
+    SectorApi.getAllSectors(dataFromToken(token)).then((response) => {
 
-         // console.log(response.data.data) ;
-          setData(response.data.data);
+        //console.log(response.data.data) ;
+        setData(response.data.data);
 
-      });
+    });
 
-  },[]);
+},[]);
+
   return (
       <>
           <DashboardLayout>

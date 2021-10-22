@@ -35,8 +35,51 @@ class AppointmentApi{
         }
 
     }
-   
+    // async getAllAppointments(id){
 
+    //     try {
+    //         const res= await axios.get(CIVIL_API_APPOINTMENT+"/all"+id,config);
+    //         return res;
+    //     } catch (error) {
+    //         console.log(error.response);
+    //         return error.response;
+    //     }
+
+    // }
+     
+    async deleteOneAppointment(id){
+        try {
+            const res = await axios.delete(CIVIL_API_APPOINTMENT+"/"+id,config);
+            return res;
+        } catch (error) {
+            return error.response;
+        }
+    }
+   
+    async updateOneAppointment(id){
+        try {
+            const res = await axios.patch(CIVIL_API_APPOINTMENT+"/"+id,config);
+            return res;
+        } catch (error) {
+            return error.response;
+        }
+    }
+    async acceptAppointment(id){
+        try {
+            const res = await axios.patch(CIVIL_API_APPOINTMENT+"/"+id+"/approve",config);
+            return res;
+        } catch (error) {
+            return error.response;
+        }
+    }
+    async declineAppointment(id){
+        try {
+            const res = await axios.patch(CIVIL_API_APPOINTMENT+"/"+id+"/decline",config);
+            return res;
+        } catch (error) {
+            return error.response;
+        }
+    }
 }
 
 export default new AppointmentApi();

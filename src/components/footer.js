@@ -19,7 +19,7 @@ import {
 } from "@ant-design/icons";
 const Footer = () => {
 return (
-	<Box>
+	<Box style={{marginTop:"400px"}}>
 	<h1 style={{ color: "white",
 				textAlign: "center",
 				marginTop: "-50px" }}>
@@ -27,20 +27,20 @@ return (
 	</h1>
 	<Container>
 		<Row>
-		<Column>
-			<Heading>About Us</Heading>
+		<Column >
+			<Heading>ABOUT US</Heading>
 			<FooterLink href="#"style={{color:"white"}} >Mission</FooterLink>
 			<FooterLink href="#" style={{color:"white"}}>Vision</FooterLink>
 			<FooterLink href="#"style={{color:"white"}} >Testimonials</FooterLink>
 		</Column>
 		<Column>
-			<Heading>Services</Heading>
+			<Heading>SERVICES</Heading>
 			<FooterLink href="#"style={{color:"white"}}>Registration</FooterLink>
 			<FooterLink href="#"style={{color:"white"}}>Marriage</FooterLink>
 			
 		</Column>
 		<Column>
-			<Heading>Contact Us</Heading>
+			<Heading>CONTACT US</Heading>
 			<FooterLink href="#"style={{color:"white"}} ><strong>
                   {" "}
                   <GooglePlusOutlined className="arrow-icon" />{" "}
@@ -59,7 +59,7 @@ return (
 			
 		</Column>
 		<Column>
-			<Heading>Social Media</Heading>
+			<Heading>SOCIAL MEDIA</Heading>
 			<FooterLink href="#" style={{color:"white"}}>
 			<i className="fab fa-facebook-f"><strong>
                   {" "}
@@ -99,6 +99,8 @@ return (
 				Youtube
 				</span>
 			</i>
+			<p style={{marginLeft:"-800px",marginTop:"10px"}}>© 2021 MarryFromHome.com. All right reserved.   
+Copyright Disclaimer</p>
 			</FooterLink>
 		</Column>
 		</Row>

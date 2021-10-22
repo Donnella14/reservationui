@@ -47,7 +47,18 @@ class AuthApi{
             return error.response;
         }
     }
+    async getAllEmployees(){
+        try{
+const res = await axios.get(CIVIL_API_AUTH+"/all/employees",config)
+return res;
+        }catch(error){
 
+            return error.response;
+            
+       
+        }
+
+    }
 }
 
 export default new AuthApi();

@@ -9,6 +9,7 @@ import {useHistory} from "react-router-dom";
 
 import AppointmentApi from '../services/AppointmentAuth';
 import AppointmentList from '../views/AppointmentList';
+import SectorApi from '../services/SectorAuth';
 
 const { Option } = Select;
 
@@ -34,6 +35,7 @@ function onSearch(val) {
 const AppointmentCreation =()=>{
   const [schedulers,setSchedulers]=useState([]);
   const [users,setUsers]=useState([]);
+  const [sectors,setSectors]=useState([]);
   const history = useHistory();
 
   const onFinish = async(values) => {
@@ -57,12 +59,10 @@ return notification.error({message:response.data.message})
     // console.log('Received values of form: ', values);
   };
 
+  useEffect(() => {
+    SectorApi.getAllSectors().then((res)=>{setSectors(res.data.data)});
+    },[sectors])
 
- useEffect(() => {
-    AuthApi.getAllUsers().then((res)=>{setUsers(res.data.data)});
-    },[users])
-
-  
 useEffect(() => {
   SchedulerApi.getAllSchedulers().then((res)=>{setSchedulers(res.data.data)});
   },[schedulers])
@@ -79,16 +79,13 @@ useEffect(() => {
           <Row>
             <Col md="6">
   
-            { <Form.Item style={{ marginBottom: 0 }}>
-            
-          
-            <Form.Item label="Select User" name="NormalUser"
+            <Form.Item label="Select Sector" name="sector"
             >
    
    <Select
                        showSearch
                        style={{ width: 200 }}
-                       placeholder="Select the user"
+                       placeholder="Select the sector"
                        optionFilterProp="children"
                        onChange={onChange}
                        onFocus={onFocus}
@@ -99,15 +96,17 @@ useEffect(() => {
                        }
                    >
                        {
-                           users.map((NormalUser) => (
-                               <Option value={NormalUser._id}>{NormalUser.firstName}</Option>
+                           sectors.map((sector) => (
+                               <Option value={sector._id}>{sector.sectorName}</Option>
                            ))
                        }
    
    
                    </Select>
                </Form.Item>
-               </Form.Item> } 
+             
+
+              
           <Form.Item style={{ marginBottom: 0 }}>
             
           

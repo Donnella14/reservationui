@@ -35,8 +35,26 @@ class SchedulerApi{
         }
 
     }
-   
+    async acceptscheduler(id){
+        try {
+            const res = await axios.patch(CIVIL_API_SCHEDULER+"/"+id+"/BOOKED",config);
+            return res;
+        } catch (error) {
+            return error.response;
+        }
+    }
+    async getAllSchedulerUser(id) {
+        try {
+            const res = await axios.get(CIVIL_API_SCHEDULER + "/all/" + id, config)
+            return res;
+        } catch (error) {
 
+            return error.response;
+
+
+        }
+
+    }
 }
 
 export default new SchedulerApi();

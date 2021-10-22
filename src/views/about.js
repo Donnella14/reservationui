@@ -3,13 +3,16 @@ import React from "react";
 import Header from "../components/Header";
 
 import About from "../components/About";
-import DashboardLayout from "../components/DashboardLayout";
+
+
+import Footer from "../components/footerAbout";
 
 const Abouts=()=>{
 return(
 <>
-<DashboardLayout/>
+<Header/>
 <About/>
+
 
 </>
 )

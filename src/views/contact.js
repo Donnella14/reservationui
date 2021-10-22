@@ -9,7 +9,7 @@ import DashboardLayout from "../components/DashboardLayout";
 const Contacts=()=>{
 return(
 <>
-<DashboardLayout/>
+<Header/>
 <Contact/>
 
 </>

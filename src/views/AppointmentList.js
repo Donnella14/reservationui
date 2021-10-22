@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 
@@ -8,9 +8,10 @@ import AppointmentSession from "../components/appointmentCreation";
 import DashboardLayout from "../components/DashboardLayout";
 import dataFromToken from "../utils/tokenDecorder";
 import UserProfile from "../components/UserProfile";
-import { Modal,Tag,Space, Button,Table,Drawer,notification} from 'antd';
-import Scheduler from "./SchedulerList";
-import Schedulers from "./dashboard/Scheduler";
+import { Modal, Tag, Space, Button, Table, Drawer, notification } from 'antd';
+
+import AuthApi from "../services/Auth";
+import SessionProfile from "../components/SessionProfile";
 
 
 
@@ -19,112 +20,194 @@ import Schedulers from "./dashboard/Scheduler";
 const AppointmentList = () => {
 
 
-  const token = localStorage.getItem("civil_token");
-  const [appointment, setAppointment] = useState({});
-  const [isModalVisible, setIsModalVisible] = useState(false);
+    const token = localStorage.getItem("civil_token");
+    const [session, setSession] = useState({});
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const [data, setData] = useState([]);
-  const [visible, setVisible] = useState(false);
+    const [data, setData] = useState([]);
+    const [visible, setVisible] = useState(false);
 
-  const showModal = () => {
-      setIsModalVisible(true);
-  };
-
-
-  const handleOk = () => {
-      setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-      setIsModalVisible(false);
-  };
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
 
 
-  const onClose = () => {
-      setVisible(false);
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
 
-  }
-
-  const columns = [
-      {
-          title: 'User',
-          dataIndex: 'NormalUser',
-          key: 'NormalUser',
-          render: NormalUser => <a>{NormalUser.firstName} {NormalUser.lastName} </a>,
-      },
-     
-      {
-          title: 'Schedulers',
-          dataIndex: 'Scheduler',
-          key: 'Scheduler',
-        render: Scheduler => <a>{Scheduler.services} </a>,
-      },
-      {
-          title: 'Comment',
-          dataIndex: 'Comment',
-          key: 'Comment',
-      },
-      {
-          title: 'PartnerName',
-          key: 'partnerName',
-          dataIndex: 'partnerName',
-         
-      },
-      {
-        title: 'PartnerNationalId',
-        key: 'partnerNationalId',
-        dataIndex: 'partnerNationalId',
-       
-    },
-      {
-        title: 'Registration Date',
-        key: 'registeredOn',
-        dataIndex: 'registeredOn',
-       
-    },
-     
-  ];
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
 
 
-  useEffect(() => {
-    AppointmentApi.getAllAppontments(dataFromToken(token)).then((response) => {
+    const onClose = () => {
+        setVisible(false);
 
-         // console.log(response.data.data) ;
-          setData(response.data.data);
+    }
+    
+    const columns = [
 
-      });
+        {
+            title: 'sectorName',
+            dataIndex: 'sector',
+            key: 'sector',
+            render: sector => <a>{sector.sectorName} </a>,
+        },
 
-  },[]);
-  return (
-      <>
-          <DashboardLayout>
+        {
+            title: 'Schedulers',
+            dataIndex: 'Scheduler',
+            key: 'Scheduler',
+            render: Scheduler => <a>{Scheduler.services}</a>,
+        },
+        {
+            title: 'Comment',
+            dataIndex: 'Comment',
+            key: 'Comment',
+        },
+        {
+            title: 'PartnerName',
+            key: 'partnerName',
+            dataIndex: 'partnerName',
 
-          {dataFromToken(token).role=="admin"? (<></>): (<Button onClick={showModal}>Create Appointment</Button>)}
+        },
+        {
+            title: 'PartnerNationalId',
+            key: 'partnerNationalId',
+            dataIndex: 'partnerNationalId',
 
-<Table columns={columns} dataSource={data} />
+        },
+        {
+            title: 'Registration Date',
+            key: 'registeredOn',
+            dataIndex: 'registeredOn',
 
-<Modal title="New Appointment" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-    <div style={{ padding: "30px" }}>
-        <AppointmentSession/>
-        
+        },
+        {
+            title: 'Status',
+            key: 'status',
+            dataIndex: 'status',
+            render: tag => {
+                let color = tag === "pending" ? 'black' : tag === "decline" ? "#20c997" : "#422510";
+                return (
+                    <Tag color={color} key={tag}>
+                        {tag.toUpperCase()}
+                    </Tag>
+                );
 
-    </div>
-</Modal>
+            },
+        },
+
+        {
+            title: 'Action',
+            key: 'action',
+            render: (text, record) => {
+                const deleteAppointment = async (id) => {
+                    const response = await AppointmentApi.deleteOneAppointment(id);
+                    console.log("response:", response);
+                    if (!response) {
+                        return notification.error({ message: "failed to respond!" })
+                    }
+                    return notification.success({ message: "successfully deleted" })
+
+                }
+                const updateAppointment = async (id) => {
+                    const response = await AppointmentApi.updateOneAppointment(id);
+                    console.log("response:", response);
+                    if (!response) {
+                        return notification.error({ message: "failed to respond!" })
+                    }
+                    return notification.success({ message: "successfull Declined" })
+
+                }
+
+                const acceptAppointments = async (id) => {
+                    const response = await AppointmentApi.acceptAppointment(id);
+                    console.log("response:", response);
+                    if (!response) {
+                        return notification.error({ message: "failed to respond!" })
+                    }
+                    return notification.success({ message: "successfully accepted" })
+
+                }
+                const declineAppointments = async (id) => {
+                    const response = await AppointmentApi.declineAppointment(id);
+                    console.log("response:", response);
+                    if (!response) {
+                        return notification.error({ message: "failed to respond!" })
+                    }
+                    return notification.success({ message: "successfull Declined" })
+
+                }
 
 
-          </DashboardLayout>
+
+                return (
+
+                    
+                    <Space size="middle">
+                         {dataFromToken(token).role=="Employee"? (<>
+                           
+                            <a onClick={() => { acceptAppointments(record._id) }} style={{ color: "green" }}>Approve</a>
+                            <a onClick={() => { declineAppointments(record._id) }} style={{ color: "red" }}>Decline</a>
+                        </>):(<></>)}
+                        
+
+                             
+                        {dataFromToken(token).role=="user"? (<>
+                             <a onClick={() => { setVisible(false); deleteAppointment(record._id) }}>Delete</a>
+                            <a>Edit</a> 
+                            </>):(<></>)}
+                        
+                          
+   
+                    </Space>
+                )
+            },
+        },
+    ];
+
+
+    useEffect(() => {
+        AppointmentApi.getAllAppontments(dataFromToken(token)).then((response) => {
+
+            // console.log(response.data.data) ;
+            setData(response.data.data);
+
+        });
+
+    }, []);
+    return (
+        <>
+            <DashboardLayout>
+
+                {dataFromToken(token).role == "admin" ? (<></>) : dataFromToken(token).role == "Employee" ? (<></>) : (<Button onClick={showModal}>Create Appointment</Button>)}
+
+                <Table columns={columns} dataSource={data} />
+
+                <Modal title="New Appointment" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                    <div style={{ padding: "30px" }}>
+                        <AppointmentSession />
+
+
+                    </div>
+                </Modal>
+
+
+            </DashboardLayout>
 
 
 
 
-<Drawer
+            <Drawer
                 width={640}
                 placement="right"
                 closable={false}
                 onClose={onClose}
                 visible={visible}
             >
-                <UserProfile session={appointment} />
+                <SessionProfile session={session} />
             </Drawer>
         </>
     )

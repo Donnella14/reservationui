@@ -35,7 +35,18 @@ class SectorApi{
         }
 
     }
-   
+    async getAllSectorUser(id) {
+        try {
+            const res = await axios.get(CIVIL_API_SESSION + "/all/" + id, config)
+            return res;
+        } catch (error) {
+
+            return error.response;
+
+
+        }
+
+    }
 
 }
 

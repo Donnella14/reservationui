@@ -9,7 +9,7 @@ const Home =()=>{
         <div>
             <Header/>
             <OurProfile/>
-            <Card/>
+            
             <Footer/>
         </div>
     )

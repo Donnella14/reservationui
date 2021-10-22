@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 
 import SchedulerApi from "../services/SchedulerAuth";
-
+import {useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
 import SchedulerSession from "../components/schedulerCreation";
 import DashboardLayout from "../components/DashboardLayout";
 import dataFromToken from "../utils/tokenDecorder";
 import UserProfile from "../components/UserProfile";
 import { Modal,Tag,Space, Button,Table,Drawer,notification} from 'antd';
-
+import AppointmentApi from '../services/AppointmentAuth';
 
 
 
@@ -44,6 +45,10 @@ const SchedulerList = () => {
 
   }
 
+
+  const history = useHistory();
+  
+  
   const columns = [
       {
           title: 'Services Name',
@@ -58,6 +63,7 @@ const SchedulerList = () => {
           key: 'sector',
         render: sector => <a>{sector.sectorName} </a>,
       },
+      
       {
           title: 'Date',
           dataIndex: 'date',
@@ -75,7 +81,59 @@ const SchedulerList = () => {
         dataIndex: 'timeToEnd',
        
     },
+    {
+        title: 'Status',
+        key: 'status',
+        dataIndex: 'status',
+        render: tag => {
+            let color = tag === "AVAILABLE" ? 'black' : tag === "BOOKED" ? "#20c997" : "#422510";
+            return (
+                <Tag color={color} key={tag}>
+                    {tag.toUpperCase()}
+                </Tag>
+            );
+
+        },
+    },
      
+   
+
+
+        {
+            title: 'Action',
+            key: 'action',
+            render: (text, record) => {
+               
+
+                const book = async (id) => {
+                    const response = await SchedulerApi.acceptscheduler(id);
+                    console.log("response:", response);
+                    if (!response) {
+                        return notification.error({ message: "failed to respond!" })
+                    }
+                    return notification.success({ message: "successfully accepted" })
+
+                }
+              
+
+
+                return (
+
+                    
+                    <Space size="middle">
+                         {dataFromToken(token).role=="user"? (<>
+                           {record.status!="AVAILABLE" ?
+                           (<Link style={{textDecoration:"none"}} to="/appointments">APPLY</Link>) :
+                           ( <a onClick={() => { book(record._id) }} style={{ color: "green" }}>BOOK</a>)}
+                           
+                        </>):(<></>)}
+                   
+   
+                    </Space>
+                )
+            },
+        },
+
   ];
 
 

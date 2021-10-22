@@ -57,10 +57,10 @@ return notification.error({message:response.data.message})
 
 
   
-useEffect(() => {
-  AuthApi.getAllUsers().then((res)=>{setEmployees(res.data.data)});
-  },[employees])
-
+  useEffect(() => {
+    AuthApi.getAllEmployees().then((res)=>{setEmployees(res.data.data)});
+    },[employees])
+  
     return (
       <Form 
       name="Session-Request"
@@ -91,7 +91,7 @@ useEffect(() => {
           </Form.Item>
 
             
-         <Form.Item label="Select Employee"name="employee"
+         <Form.Item label="Select Employee" name="Employee"
          >
 
 <Select
@@ -108,8 +108,8 @@ useEffect(() => {
                     }
                 >
                     {
-                        employees.map((employee) => (
-                            <Option value={employee._id}>{employee.firstName} {employee.lastName} </Option>
+                        employees.map((Employee) => (
+                            <Option value={Employee._id}>{Employee.firstName} {Employee.lastName} </Option>
                         ))
                     }
 
