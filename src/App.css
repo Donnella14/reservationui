@@ -36,3 +36,51 @@
     transform: rotate(360deg);
   }
 }
+
+.section{
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.main-heading{
+
+  color: #422510;
+  font-size: 26px;
+}
+.underline{
+  height: 04px;
+  width: 4rem;
+  background-color: #20c997;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.para{
+  width: 1000px;
+  margin-left: -400px;
+  
+}
+
+.now{
+  margin-left: -200px;
+  margin-top: 50px;
+  
+}
+.more{
+  margin-left: 100px;
+  width: 150px;
+  margin-top: -65px; 
+}
+.section1{
+  padding-top:200px;
+  padding-bottom: 40px;
+  
+  
+}
+
+.underline1{
+  height: 04px;
+  width: 10rem;
+  background-color: #20c997;
+  margin-top: 40px;
+  margin-bottom: 10px;
+}

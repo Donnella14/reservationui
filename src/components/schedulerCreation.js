@@ -6,7 +6,7 @@ import {useHistory} from "react-router-dom";
   import SectorApi from '../services/SectorAuth';
   
   import SchedulerApi from '../services/SchedulerAuth';
-
+import AuthApi from '../services/Auth';
 
 
 const { Option } = Select;
@@ -32,6 +32,7 @@ function onSearch(val) {
 
 const SchedulerCreation =()=>{
   const [schedulers,setSchedulers]=useState([]);
+  const [employees,setEmployees]=useState([]);
   const [sectors,setSectors]=useState([]);
   const history = useHistory();
 
@@ -62,6 +63,11 @@ return notification.error({message:response.data.message})
 useEffect(() => {
   SectorApi.getAllSectors().then((res)=>{setSectors(res.data.data)});
   },[sectors])
+
+  // useEffect(() => {
+  //   AuthApi.getAllEmployees().then((res)=>{setEmployees(res.data.data)});
+  //   },[employees])
+
 
     return (
       <Form 
@@ -121,6 +127,9 @@ useEffect(() => {
                    </Select>
                </Form.Item>
                </Form.Item>
+
+              
+            
                <Form.Item style={{ marginBottom: 0 }}>
        
              <Form.Item

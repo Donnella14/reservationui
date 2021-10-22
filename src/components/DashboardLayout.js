@@ -1,6 +1,7 @@
-import React ,{useState}from "react";
+import React, { useState, useEffect }from "react";
 import { Layout, Menu,Modal } from 'antd';
 import {Link} from "react-router-dom";
+import decode from "../utils/tokenDecorder";
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -21,7 +22,7 @@ import {
 const DashboardLayout =({children})=> {
 
     const [collapsed,setCollapsed] =useState(false);
-
+    const [token, setToken] = useState(null);
     const toggle =()=>{
         setCollapsed(!collapsed);
     }
@@ -56,7 +57,10 @@ const DashboardLayout =({children})=> {
       });
     };
     
-
+    useEffect(() => {
+      setToken(localStorage.getItem("civil_token"));
+  
+    })
     return(
     <>
     
@@ -68,35 +72,30 @@ const DashboardLayout =({children})=> {
     </Modal>
         <MyHeader/>
         <Layout>
-        <Sider trigger={null} collapsible collapsed={collapsed} style={{height:"95vh"}}>
+        <Sider trigger={null} collapsible collapsed={collapsed} class="d-flex flex-column flex-shrink-0 p-3 bg-light" style={{height:"95vh"}}>
           <div className="logo" />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+       
+        <h6 style={{color: "#422510", marginTop: -0, fontFamily:"Arial"}}> {!token?(<></>):(<>{decode(token).firstName}&nbsp;&nbsp;{decode(token).lastName} </>)} </h6>
           
-            <Menu.Item key="1" icon={<UserOutlined />}>
-                <Link to="/dashboard">   Sector      </Link>
+          <Menu   mode="inline" defaultSelectedKeys={['1']} className="menu">
+          
+            <Menu.Item key="1" class="nav-link active" aria-current="page" icon={<UserOutlined />}>
+                <Link style={{textDecoration:"none"}} to="/dashboard">   Sector      </Link>
               
             </Menu.Item>
-            <Menu.Item key="5" icon={<CaretRightOutlined />}>
-            <Link onClick={handleClick} to="/about">About Us</Link>
-            </Menu.Item>
-            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-                <Link to="/dashsectors">   All Sectors      </Link>
            
-            </Menu.Item>
             <Menu.Item key="6" icon={<VideoCameraOutlined />}>
-                <Link to="/appointments">   All Appointments      </Link>
+                <Link style={{textDecoration:"none"}} to="/appointments">   All Appointments      </Link>
            
             </Menu.Item>
             <Menu.Item key="7" icon={<VideoCameraOutlined />}>
-                <Link to="/schedulers">   All Scheduler      </Link>
+                <Link style={{textDecoration:"none"}} to="/schedulers">   All Scheduler      </Link>
            
             </Menu.Item>
             <Menu.Item key="3" icon={<UploadOutlined />}>
-            <Link to="/profile">   Profile      </Link>
+            <Link style={{textDecoration:"none"}}  to="/profile">   Profile      </Link>
             </Menu.Item>
-            <Menu.Item key="4" icon={<ContactsOutlined />}>
-            <Link onClick={handleClick} to="/contact">Contact Us</Link>
-            </Menu.Item>
+           
             <Menu.Item key="Register" onClick={showModal} icon={<AntDesignOutlined />}> 
          Register
         </Menu.Item>

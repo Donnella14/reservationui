@@ -4,8 +4,8 @@ import image2 from "../assets/7.jpg";
 const Card = () => {
     return(
         <>
-        <section className="grid" style={{backgroundColor:"lavender"}}>
-            <h3>helloooo</h3>
+        <section className="grid">
+            
             <div className="grid-items">
                 <div>
                     <img src={image1} alt='' />
