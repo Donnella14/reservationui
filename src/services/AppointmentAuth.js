@@ -35,17 +35,7 @@ class AppointmentApi{
         }
 
     }
-    // async getAllAppointments(id){
-
-    //     try {
-    //         const res= await axios.get(CIVIL_API_APPOINTMENT+"/all"+id,config);
-    //         return res;
-    //     } catch (error) {
-    //         console.log(error.response);
-    //         return error.response;
-    //     }
-
-    // }
+  
      
     async deleteOneAppointment(id){
         try {

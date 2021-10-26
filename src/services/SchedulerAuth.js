@@ -45,7 +45,7 @@ class SchedulerApi{
     }
     async getAllSchedulerUser(id) {
         try {
-            const res = await axios.get(CIVIL_API_SCHEDULER + "/all/" + id, config)
+            const res = await axios.get(CIVIL_API_SCHEDULER + "/all/"+id, config)
             return res;
         } catch (error) {
 

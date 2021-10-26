@@ -62,7 +62,7 @@ return notification.error({message:response.data.message})
   
 useEffect(() => {
   SectorApi.getAllSectors().then((res)=>{setSectors(res.data.data)});
-  },[sectors])
+  },[])
 
   // useEffect(() => {
   //   AuthApi.getAllEmployees().then((res)=>{setEmployees(res.data.data)});
