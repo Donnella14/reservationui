@@ -1,7 +1,7 @@
 import React from "react";
 
 import Header from "../components/Header";
-import Footer from "../components/footer";
+import Footer from "../components/footerContact";
 import Contact from "../components/contact";
 import Dashboard from "./Dashboard";
 import DashboardLayout from "../components/DashboardLayout";
@@ -11,7 +11,7 @@ return(
 <>
 <Header/>
 <Contact/>
-
+<Footer/>
 </>
 )
 }

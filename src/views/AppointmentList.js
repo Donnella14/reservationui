@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ReactDOM from 'react-dom';
+
 import 'antd/dist/antd.css';
 
 import AppointmentApi from "../services/AppointmentAuth";
@@ -7,12 +7,12 @@ import AppointmentApi from "../services/AppointmentAuth";
 import AppointmentSession from "../components/appointmentCreation";
 import DashboardLayout from "../components/DashboardLayout";
 import dataFromToken from "../utils/tokenDecorder";
-import UserProfile from "../components/UserProfile";
+
 import { Modal, Tag, Space, Button, Table, Drawer, notification } from 'antd';
+import { DeleteOutlined, EditOutlined, CloseSquareOutlined,CheckSquareOutlined } from '@ant-design/icons';
 
-import AuthApi from "../services/Auth";
 import SessionProfile from "../components/SessionProfile";
-
+import { useHistory } from "react-router-dom";
 
 
 
@@ -45,7 +45,7 @@ const AppointmentList = () => {
         setVisible(false);
 
     }
-    
+    const history = useHistory();
     const columns = [
 
         {
@@ -60,6 +60,12 @@ const AppointmentList = () => {
             dataIndex: 'Scheduler',
             key: 'Scheduler',
             render: Scheduler => <a>{Scheduler.services}</a>,
+        },
+        {
+            title: 'Employee Name',
+            dataIndex: 'Employee',
+            key: 'Employee',
+            render: Employee => <a>{Employee.firstName} {Employee.lastName}</a>,
         },
         {
             title: 'Comment',
@@ -89,7 +95,7 @@ const AppointmentList = () => {
             key: 'status',
             dataIndex: 'status',
             render: tag => {
-                let color = tag === "pending" ? 'black' : tag === "decline" ? "#20c997" : "#422510";
+                let color = tag === "pending" ? 'red' : tag === "decline" ? "#20c997" : "#422510";
                 return (
                     <Tag color={color} key={tag}>
                         {tag.toUpperCase()}
@@ -107,61 +113,115 @@ const AppointmentList = () => {
                     const response = await AppointmentApi.deleteOneAppointment(id);
                     console.log("response:", response);
                     if (!response) {
-                        return notification.error({ message: "failed to respond!" })
-                    }
-                    return notification.success({ message: "successfully deleted" })
+                        return notification.error({ message: "request failed,Network error" })
 
-                }
+                    }
+                    if (response.data.status === 200) {
+                        notification.success({ message: "Appointment deleted successful" });
+
+
+
+                        history.push("/dashboard")
+                        return window.location.reload();
+                    }
+                    else {
+                        return notification.error({ message: response.data.message })
+                    }
+                    // console.log('Received values of form: ', values);
+                };
+
+
+
+
                 const updateAppointment = async (id) => {
                     const response = await AppointmentApi.updateOneAppointment(id);
                     console.log("response:", response);
                     if (!response) {
-                        return notification.error({ message: "failed to respond!" })
-                    }
-                    return notification.success({ message: "successfull Declined" })
+                        return notification.error({ message: "request failed,Network error" })
 
-                }
+                    }
+                    if (response.data.status === 200) {
+                        notification.success({ message: "Appointment Updated successful" });
+
+
+
+                        history.push("/dashboard")
+                        return window.location.reload();
+                    }
+                    else {
+                        return notification.error({ message: response.data.message })
+                    }
+                    // console.log('Received values of form: ', values);
+                };
+
+
+
+
 
                 const acceptAppointments = async (id) => {
                     const response = await AppointmentApi.acceptAppointment(id);
                     console.log("response:", response);
                     if (!response) {
-                        return notification.error({ message: "failed to respond!" })
-                    }
-                    return notification.success({ message: "successfully accepted" })
+                        return notification.error({ message: "request failed,Network error" })
 
-                }
+                    }
+                    if (response.data.status === 200) {
+                        notification.success({ message: "Appointment Accepted successful" });
+
+
+
+                        history.push("/dashboard")
+                        return window.location.reload();
+                    }
+                    else {
+                        return notification.error({ message: response.data.message })
+                    }
+                    // console.log('Received values of form: ', values);
+                };
+
+
+
+
                 const declineAppointments = async (id) => {
                     const response = await AppointmentApi.declineAppointment(id);
                     console.log("response:", response);
                     if (!response) {
-                        return notification.error({ message: "failed to respond!" })
+                        return notification.error({ message: "request failed,Network error" })
+
                     }
-                    return notification.success({ message: "successfull Declined" })
+                    if (response.data.status === 200) {
+                        notification.success({ message: "Appointment Declined successful" });
 
-                }
 
 
+                        history.push("/dashboard")
+                        return window.location.reload();
+                    }
+                    else {
+                        return notification.error({ message: response.data.message })
+                    }
+                    // console.log('Received values of form: ', values);
+                };
 
                 return (
 
-                    
-                    <Space size="middle">
-                         {dataFromToken(token).role=="Employee"? (<>
-                           
-                            <a onClick={() => { acceptAppointments(record._id) }} style={{ color: "green" }}>Approve</a>
-                            <a onClick={() => { declineAppointments(record._id) }} style={{ color: "red" }}>Decline</a>
-                        </>):(<></>)}
-                        
 
-                             
-                        {dataFromToken(token).role=="user"? (<>
-                             <a onClick={() => { setVisible(false); deleteAppointment(record._id) }}>Delete</a>
-                            <a>Edit</a> 
-                            </>):(<></>)}
-                        
-                          
-   
+                    <Space size="middle">
+                        {dataFromToken(token).role == "Employee" ? (<>
+
+                            <a onClick={() => { acceptAppointments(record._id) }} style={{ color: "green" }}><CheckSquareOutlined /></a>
+                            <a onClick={() => { declineAppointments(record._id) }} style={{ color: "red" }}><CloseSquareOutlined /></a>
+                        </>) : (<></>)}
+
+
+
+                        {dataFromToken(token).role == "user" ? (<>
+                            <a onClick={() => { setVisible(false); deleteAppointment(record._id) }} ><DeleteOutlined /></a>
+                            <a><EditOutlined /></a>
+                        </>) : (<></>)}
+
+
+
                     </Space>
                 )
             },
@@ -170,7 +230,7 @@ const AppointmentList = () => {
 
 
     useEffect(() => {
-        AppointmentApi.getAllAppontments(dataFromToken(token)).then((response) => {
+        AppointmentApi.getAllAppontments(dataFromToken(token).id).then((response) => {
 
             // console.log(response.data.data) ;
             setData(response.data.data);
@@ -182,7 +242,7 @@ const AppointmentList = () => {
         <>
             <DashboardLayout>
 
-                {dataFromToken(token).role == "admin" ? (<></>) : dataFromToken(token).role == "Employee" ? (<></>) : (<Button onClick={showModal}>Create Appointment</Button>)}
+                {dataFromToken(token).role == "admin" ? (<></>) : dataFromToken(token).role == "Employee" ? (<></>) : (<Button style={{ backgroundColor: "#20c997" }} onClick={showModal}>Create Appointment</Button>)}
 
                 <Table columns={columns} dataSource={data} />
 

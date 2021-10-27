@@ -79,16 +79,6 @@ const Dashboard = () => {
   ];
 
 
-//   useEffect(() => {
-//       SectorApi.getAllSectorUser(dataFromToken(token)).then((response) => {
-
-//           //console.log(response.data.data) ;
-//           setData(response.data.data);
-
-//       });
-
-//   },[]);
-
 
   useEffect(() => {
     SectorApi.getAllSectors(dataFromToken(token)).then((response) => {
@@ -104,11 +94,11 @@ const Dashboard = () => {
       <>
           <DashboardLayout>
 
-           {dataFromToken(token).role=="user"? (<></>) : dataFromToken(token).role=="Employee"? (<></>): (<Button onClick={showModal}>Create Sector</Button>)} 
+           {dataFromToken(token).role=="user"? (<></>) : dataFromToken(token).role=="Employee"? (<></>): (<Button style={{backgroundColor:"#20c997"}} onClick={showModal}>Create Sector</Button>)} 
 
 <Table columns={columns} dataSource={data} />
 
-<Modal title="New Sector" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+<Modal title="New Sector" visible={isModalVisible}  onOk={handleOk} onCancel={handleCancel}>
     <div style={{ padding: "30px" }}>
         <Session />
 

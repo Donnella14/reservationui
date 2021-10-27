@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import decode from "../utils/tokenDecorder";
 import SigninForm from "./SigninForm";
 import RegistrationForm from "./signup";
+import { HomeOutlined, ContactsOutlined, LoginOutlined } from '@ant-design/icons';
 
 const Header = () => {
 
@@ -75,7 +76,7 @@ const Header = () => {
             <h6 style={{ color: "white", marginTop: -0, fontFamily: "Arial" }}> {!token ? (<></>) : (<>{decode(token).firstName}&nbsp;&nbsp;{decode(token).lastName} </>)} </h6>
 
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0" >
-              <li class="nav-item" onClick={handleClick} selectedKeys={[current]}>
+              <li class="nav-item" onClick={handleClick}  selectedKeys={[current]}>
                 {/* <a  aria-current="page" href="/">Home</a> */}
                 <Link to="/" class="nav-link ">HOME</Link>
               </li>

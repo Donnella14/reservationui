@@ -10,12 +10,7 @@ import DashboardLayout from "../components/DashboardLayout";
 import dataFromToken from "../utils/tokenDecorder";
 import UserProfile from "../components/UserProfile";
 import { Modal,Tag,Space, Button,Table,Drawer,notification} from 'antd';
-import AppointmentApi from '../services/AppointmentAuth';
-
-
-
-
-
+import { DeleteOutlined, EditOutlined, CloseSquareOutlined,CheckSquareOutlined } from '@ant-design/icons';
 const SchedulerList = () => {
 
 
@@ -50,6 +45,8 @@ const SchedulerList = () => {
   
   
   const columns = [
+
+    
       {
           title: 'Services Name',
           dataIndex: 'services',
@@ -86,7 +83,7 @@ const SchedulerList = () => {
         key: 'status',
         dataIndex: 'status',
         render: tag => {
-            let color = tag === "AVAILABLE" ? 'black' : tag === "BOOKED" ? "#20c997" : "#422510";
+            let color = tag === "AVAILABLE" ? 'red' : tag === "BOOKED" ? "#20c997" : "#422510";
             return (
                 <Tag color={color} key={tag}>
                     {tag.toUpperCase()}
@@ -103,17 +100,56 @@ const SchedulerList = () => {
             title: 'Action',
             key: 'action',
             render: (text, record) => {
-               
+                const deleteScheduler = async (id) => {
+                    const response = await SchedulerApi.deleteOneScheduler(id);
+                    console.log("response:", response);
+                    if (!response) {
+                      return notification.error({ message: "request failed,Network error" })
+                
+                    }
+                    if (response.data.status === 200) {
+                      notification.success({ message: "Scheduler requested successful" });
+                
+                
+                
+                      history.push("/dashboard")
+                      return window.location.reload();
+                    }
+                    else {
+                      return notification.error({ message: response.data.message })
+                    }
+                    // console.log('Received values of form: ', values);
+                  };
+                
+                
+                
+                
 
                 const book = async (id) => {
                     const response = await SchedulerApi.acceptscheduler(id);
                     console.log("response:", response);
                     if (!response) {
-                        return notification.error({ message: "failed to respond!" })
+                      return notification.error({ message: "request failed,Network error" })
+                
                     }
-                    return notification.success({ message: "successfully accepted" })
-
-                }
+                    if (response.data.status === 200) {
+                      notification.success({ message: "Scheduler Accepted successful" });
+                
+                
+                
+                      history.push("/dashboard")
+                      return window.location.reload();
+                    }
+                    else {
+                      return notification.error({ message: response.data.message })
+                    }
+                    // console.log('Received values of form: ', values);
+                  };
+                
+                
+                
+                
+                
               
 
 
@@ -127,8 +163,10 @@ const SchedulerList = () => {
                            ( <a onClick={() => { book(record._id) }} style={{ color: "green" }}>BOOK</a>)}
                            
                         </>):(<></>)}
-                   
-   
+                        {dataFromToken(token).role=="Employee"? (<>
+                             <a onClick={() => { setVisible(false); deleteScheduler(record._id) }}><DeleteOutlined /></a>
+                            
+                             </>):(<></>)}
                     </Space>
                 )
             },
@@ -150,7 +188,7 @@ const SchedulerList = () => {
       <>
           <DashboardLayout>
 
-          {dataFromToken(token).role=="user"? (<></>) : dataFromToken(token).role=="admin"? (<></>):  (<Button onClick={showModal}>Create Scheduler</Button>)}
+          {dataFromToken(token).role=="user"? (<></>) : dataFromToken(token).role=="admin"? (<></>):  (<Button style={{backgroundColor:"#20c997"}} onClick={showModal}>Create Scheduler</Button>)}
 
 <Table columns={columns} dataSource={data} />
 

@@ -1,180 +1,189 @@
-import React,{useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { Form, Modal, Input, Table, Button, Select, DatePicker,Row,Col,notification} from 'antd';
-import {useHistory} from "react-router-dom";
- 
-  import SectorApi from '../services/SectorAuth';
-  
-  import SchedulerApi from '../services/SchedulerAuth';
+import { Form, Modal, Input, TimePicker, Button, Select, DatePicker, Row, Col, notification } from 'antd';
+import { useHistory } from "react-router-dom";
+
+import SectorApi from '../services/SectorAuth';
+
+import SchedulerApi from '../services/SchedulerAuth';
 import AuthApi from '../services/Auth';
 
 
 const { Option } = Select;
 
 function onChange(value) {
-    console.log(`selected ${value}`);
+  console.log(`selected ${value}`);
 }
 
 function onBlur() {
-    console.log('blur');
+  console.log('blur');
 }
 
 function onFocus() {
-    console.log('focus');
+  console.log('focus');
 }
 
 function onSearch(val) {
-    console.log('search:', val);
+  console.log('search:', val);
 }
-  
- 
-  
 
-const SchedulerCreation =()=>{
-  const [schedulers,setSchedulers]=useState([]);
-  const [employees,setEmployees]=useState([]);
-  const [sectors,setSectors]=useState([]);
+
+
+
+const SchedulerCreation = () => {
+  const [schedulers, setSchedulers] = useState([]);
+  const [employees, setEmployees] = useState([]);
+  const [sectors, setSectors] = useState([]);
   const history = useHistory();
 
-  const onFinish = async(values) => {
-  const response= await SchedulerApi.createscheduler(values);
-  console.log("response:" ,response);
-  if(!response){
-    return notification.error({message:"request failed,Network error"})
-  
-  }
-  if(response.data.status===200){
-    notification.success({message:"session requested successful"});
-   
+  const onFinish = async (values) => {
+    const response = await SchedulerApi.createscheduler(values);
+    console.log("response:", response);
+    if (!response) {
+      return notification.error({ message: "request failed,Network error" })
+
+    }
+    if (response.data.status === 200) {
+      notification.success({ message: "session requested successful" });
 
 
-     history.push("/dashboard")
-     return window.location.reload();
-  }
-  else{
-return notification.error({message:response.data.message})
-  }
+
+      history.push("/dashboard")
+      return window.location.reload();
+    }
+    else {
+      return notification.error({ message: response.data.message })
+    }
     // console.log('Received values of form: ', values);
   };
 
 
 
-  
-useEffect(() => {
-  SectorApi.getAllSectors().then((res)=>{setSectors(res.data.data)});
-  },[])
+
+  useEffect(() => {
+    SectorApi.getAllSectors().then((res) => { setSectors(res.data.data) });
+  }, [])
 
   // useEffect(() => {
   //   AuthApi.getAllEmployees().then((res)=>{setEmployees(res.data.data)});
   //   },[employees])
 
-
-    return (
-      <Form 
+  function onChange(time) {
+    console.log(time);
+  }
+  return (
+    <Form
       name="Session-Request"
-        className="Session-Request"
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        scrollToFirstError
-      >
-    
-          <Row>
-            <Col md="6">
-  
-            <Form.Item style={{ marginBottom: 0 }}>
-          <Form.Item
-           name="services"
-           label="Service Name"
-           style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
-           tooltip="What do you want others to call you?"
-           rules={[
-             {
-               required: true,
-               message: 'Please input your services!',
-               whitespace: true,
-             },
-           ]}
-          >
-            <Input  placeholder="services you want" />
-          </Form.Item>
-          </Form.Item>
-          <Form.Item style={{ marginBottom: 0 }}>
-            
-          
-            <Form.Item label="Select Sector" name="sector"
-            >
-   
-   <Select
-                       showSearch
-                       style={{ width: 200 }}
-                       placeholder="Select the sector"
-                       optionFilterProp="children"
-                       onChange={onChange}
-                       onFocus={onFocus}
-                       onBlur={onBlur}
-                       onSearch={onSearch}
-                       filterOption={(input, option) =>
-                           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                       }
-                   >
-                       {
-                           sectors.map((sector) => (
-                               <Option value={sector._id}>{sector.sectorName}</Option>
-                           ))
-                       }
-   
-   
-                   </Select>
-               </Form.Item>
-               </Form.Item>
+      className="Session-Request"
+      initialValues={{ remember: true }}
+      onFinish={onFinish}
+      scrollToFirstError
+    >
 
-              
-            
-               <Form.Item style={{ marginBottom: 0 }}>
-       
-             <Form.Item
-             name="date"
-             label="Date"
-             style={{  display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px'  }}
-             rules={[{ required: true, message: 'Please input your starting time!' }]}
-           >
-             <DatePicker />
-             </Form.Item>
-             </Form.Item>
-   <Form.Item style={{ marginBottom: 0 }}>
-       
-             <Form.Item
-             name="timeToStart"
-             label="TimeToStart"
-             style={{  display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px'  }}
-             rules={[{ required: true, message: 'Please input your starting time!' }]}
-           >
-             <DatePicker />
-             </Form.Item>
-             
-             
-             <Form.Item
-             name="timeToEnd"
-             label="TimeToEnd"
-             style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
-             rules={[{ required: true, message: 'Please input your ending time!' }]}
-           >
-             <DatePicker />
-           </Form.Item>
-     </Form.Item>
+      <Row>
+        <Col md="6">
+
           <Form.Item style={{ marginBottom: 0 }}>
-           <Form.Item>
-             <Button type="primary" htmlType="submit">
-               Create Scheduler
-             </Button>
-            
-           </Form.Item>
-           </Form.Item>
-       
+            <Form.Item
+              name="services"
+              label="Service Name"
+              style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
+              tooltip="What do you want others to call you?"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your services!',
+                  whitespace: true,
+                },
+              ]}
+            >
+              <Input placeholder="services you want" />
+            </Form.Item>
+
+
+
+
+            <Form.Item
+              label="Select Sector"
+              name="sector"
+
+              style={{ display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px' }}
+            >
+
+              <Select
+                showSearch
+                style={{ width: 200 }}
+                placeholder="Select the sector"
+                optionFilterProp="children"
+                onChange={onChange}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onSearch={onSearch}
+                filterOption={(input, option) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                }
+              >
+                {
+                  sectors.map((sector) => (
+                    <Option value={sector._id}>{sector.sectorName}</Option>
+                  ))
+                }
+
+
+              </Select>
+            </Form.Item>
+          </Form.Item>
+
+
+
+          <Form.Item style={{ marginBottom: 0 }}>
+
+            <Form.Item
+              name="date"
+              label="Date"
+              style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
+              rules={[{ required: true, message: 'Please input your starting time!' }]}
+            >
+              <DatePicker />
+            </Form.Item>
+
+
+            <Form.Item
+              name="timeToStart"
+              label="TimeToStart"
+              style={{ display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px' }}
+              rules={[{ required: true, message: 'Please input your starting time!' }]}
+            >
+              <TimePicker use12Hours onChange={onChange} />
+            </Form.Item>
+
+
+
+
+          </Form.Item>
+          <Form.Item style={{ marginBottom: 0 }}>
+            <Form.Item
+              name="timeToEnd"
+              label="TimeToEnd"
+              style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
+              rules={[{ required: true, message: 'Please input your ending time!' }]}
+            >
+              <TimePicker use12Hours onChange={onChange} />
+            </Form.Item>
+
+            <Form.Item style={{ display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px', marginTop: "30px" }}>
+
+              <Button class="form-control" style={{ backgroundColor: "#20c997" }} htmlType="submit">
+                Create Scheduler
+              </Button>
+
+            </Form.Item>
+          </Form.Item>
+
         </Col>
-          </Row>
-      </Form>
-       )
+      </Row>
+    </Form>
+  )
 }
 
 export default SchedulerCreation;
