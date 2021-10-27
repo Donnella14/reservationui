@@ -55,6 +55,16 @@ class SchedulerApi{
         }
 
     }
+
+    async deleteOneScheduler(id){
+        try {
+            const res = await axios.delete(CIVIL_API_SCHEDULER+"/"+id,config);
+            return res;
+        } catch (error) {
+            return error.response;
+        }
+    }
+   
 }
 
 export default new SchedulerApi();

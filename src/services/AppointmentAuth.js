@@ -24,10 +24,10 @@ class AppointmentApi{
 
     }
 
-    async getAllAppontments(){
+    async getAllAppontments(id){
 
         try {
-            const res= await axios.get(CIVIL_API_APPOINTMENT+"/all",config);
+            const res= await axios.get(CIVIL_API_APPOINTMENT+"/all/"+id,config);
             return res;
         } catch (error) {
             console.log(error.response);

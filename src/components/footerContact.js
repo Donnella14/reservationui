@@ -19,7 +19,7 @@ import {
 } from "@ant-design/icons";
 const Footer = () => {
 return (
-	<Box style={{marginTop:"1300px"}}>
+	<Box style={{marginTop:"600px"}}>
 	<h1 style={{ color: "white",
 				textAlign: "center",
 				marginTop: "-50px" }}>

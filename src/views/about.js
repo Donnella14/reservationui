@@ -12,7 +12,7 @@ return(
 <>
 <Header/>
 <About/>
-
+<Footer/>
 
 </>
 )

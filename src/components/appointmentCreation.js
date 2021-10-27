@@ -34,6 +34,7 @@ function onSearch(val) {
 
 const AppointmentCreation =()=>{
   const [schedulers,setSchedulers]=useState([]);
+  const [employees,setEmployees]=useState([]);
   const [users,setUsers]=useState([]);
   const [sectors,setSectors]=useState([]);
   const history = useHistory();
@@ -67,6 +68,9 @@ useEffect(() => {
   SchedulerApi.getAllSchedulers().then((res)=>{setSchedulers(res.data.data)});
   },[schedulers])
  
+  useEffect(() => {
+    AuthApi.getAllEmployees().then((res) => { setEmployees(res.data.data) });
+  }, [employees])
     return (
       <Form 
       name="Session-Request"
@@ -78,8 +82,11 @@ useEffect(() => {
     
           <Row>
             <Col md="6">
-  
-            <Form.Item label="Select Sector" name="sector"
+            <Form.Item style={{ marginBottom: 0 }}>
+            <Form.Item 
+            label="Select Sector" 
+            name="sector"
+            style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
             >
    
    <Select
@@ -104,13 +111,11 @@ useEffect(() => {
    
                    </Select>
                </Form.Item>
-             
-
-              
-          <Form.Item style={{ marginBottom: 0 }}>
-            
-          
-            <Form.Item label="Select Scheduler" name="Scheduler"
+        
+            <Form.Item 
+            label="Select Scheduler"
+             name="Scheduler"
+             style={{  display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px'  }}
             >
    
    <Select
@@ -136,19 +141,50 @@ useEffect(() => {
                    </Select>
                </Form.Item>
                </Form.Item> 
+
+
+               <Form.Item 
+            label="Select Employee"
+             name="Employee"
+             style={{  display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px'  }}
+            >
+   
+   <Select
+                       showSearch
+                       style={{ width: 200 }}
+                       placeholder="Select the Employee"
+                       optionFilterProp="children"
+                       onChange={onChange}
+                       onFocus={onFocus}
+                       onBlur={onBlur}
+                       onSearch={onSearch}
+                       filterOption={(input, option) =>
+                           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                       }
+                   >
+                       {
+                           employees.map((Employee) => (
+                               <Option value={Employee._id}>{Employee.firstName} {Employee.lastName}</Option>
+                           ))
+                       }
+   
+   
+                   </Select>
+               </Form.Item>
+         
+
                <Form.Item style={{ marginBottom: 0 }}>
        
              <Form.Item
              name="Comment"
              label="Comment"
-             style={{  display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px'  }}
-             rules={[{ required: true, message: 'Please input your comment!' }]}
+             style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
+             
+            rules={[{ required: true, message: 'Please input your comment!' }]}
            >
              <Input />
              </Form.Item>
-             </Form.Item>
-   <Form.Item style={{ marginBottom: 0 }}>
-       
+      
              <Form.Item
              name="partnerName"
              label="Partner Name"
@@ -158,12 +194,14 @@ useEffect(() => {
              <Input />
              </Form.Item>
              </Form.Item>
+
              <Form.Item style={{ marginBottom: 0 }}>
        
        <Form.Item
        name="partnerNationalId"
        label="Partner ID"
-       style={{  display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px'  }}
+       style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
+             
        rules={[{ required: true, message: 'Please input your Partner ID!' }]}
      >
        <Input />
@@ -172,15 +210,16 @@ useEffect(() => {
              <Form.Item
              name="registeredOn"
              label="Registered On"
-             style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
-             rules={[{ required: true, message: 'Please input your registration date!' }]}
+             style={{  display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px'  }}
+      
+            rules={[{ required: true, message: 'Please input your registration date!' }]}
            >
              <DatePicker />
            </Form.Item>
      </Form.Item>
           <Form.Item style={{ marginBottom: 0 }}>
            <Form.Item>
-             <Button type="primary" htmlType="submit">
+             <Button class="form-control" style={{backgroundColor:"#20c997"}} htmlType="submit">
                Create Appointment
              </Button>
             
