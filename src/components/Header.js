@@ -51,7 +51,7 @@ const Header = () => {
 
         </div>
       </Modal>
- 
+
       <nav class="navbar navbar-expand-lg navbar-light " style={{ backgroundColor: "#20c997" }}>
 
         <div class="container-fluid">
@@ -76,32 +76,33 @@ const Header = () => {
             <h6 style={{ color: "white", marginTop: -0, fontFamily: "Arial" }}> {!token ? (<></>) : (<>{decode(token).firstName}&nbsp;&nbsp;{decode(token).lastName} </>)} </h6>
 
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0" >
-              <li class="nav-item" onClick={handleClick}  selectedKeys={[current]}>
+              <li class="nav-item" onClick={handleClick} selectedKeys={[current]}>
                 {/* <a  aria-current="page" href="/">Home</a> */}
-                <Link to="/" class="nav-link ">HOME</Link>
+                <Link to="/" class="nav-link active " style={{ color: "white" }} >HOME</Link>
               </li>
 
               <li key="5" class="nav-item ">
 
-                <Link class="nav-link active"  style={{ textDecoration: "none" }} onClick={handleClick} to="/about">ABOUTUS</Link>
+                <Link class="nav-link " style={{ textDecoration: "none", color: "white" }} onClick={handleClick} to="/about">ABOUTUS</Link>
               </li>
 
               <li key="4" class="nav-item ">
 
-                <Link class="nav-link active" style={{ textDecoration: "none" }} onClick={handleClick} to="/contact">CONTACTUS</Link>
+                <Link class="nav-link " style={{ textDecoration: "none", color: "white" }} onClick={handleClick} to="/contact">CONTACTUS</Link>
               </li>
               {!token ?
-                (<li key="login" class="nav-link active" onClick={showModal}>
-                  SIGNIN
+                (<li key="login" class="nav-item " style={{ textDecoration: "none", color: "white" }} onClick={showModal}>
+                  <Link class="nav-link " style={{ textDecoration: "none", color: "white" }} onClick={handleClick}> SIGNIN</Link>
+
                 </li>) :
-                (<li key="logout" class="nav-link active" onClick={() => { localStorage.removeItem("civil_token") }}>
+                (<li key="logout" class="nav-link " style={{ textDecoration: "none", color: "white" }} onClick={() => { localStorage.removeItem("civil_token") }}>
                   <Link style={{ textDecoration: "none" }} to="/home">SIGNOUT</Link>
 
                 </li>)}
 
 
               <li class="nav-item" >
-                <Link to="/home" class="nav-link active">REGISTER</Link>
+                <Link to="/home" class="nav-link" style={{ textDecoration: "none", color: "white" }}>REGISTER</Link>
               </li>
 
             </ul>
@@ -109,9 +110,9 @@ const Header = () => {
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-
           </div>
         </div>
+
 
       </nav>
 

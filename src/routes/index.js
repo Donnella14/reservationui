@@ -11,12 +11,15 @@ import AllSectors from '../views/AllSectors';
 import DashSectors from '../views/dashboard/Sectors';
 import SchedulerList from '../views/SchedulerList';
 import AppointmentList from '../views/AppointmentList';
+import UserList from '../views/userList';
+import EmployeeList from '../views/employeeList';
 
 const Index=()=>{
     return(
         <Switch>
         <Route component={AllSectors} path="/allsectors"/>
-        
+        <Route component={UserList} path="/alluser"/>
+        <Route component={EmployeeList} path="/allemployee"/>
         <Route component={SchedulerList} path="/schedulers"/>
         <Route component={AppointmentList} path="/appointments"/>
 
