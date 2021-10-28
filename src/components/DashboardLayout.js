@@ -92,9 +92,17 @@ const DashboardLayout =({children})=> {
                 <Link style={{textDecoration:"none"}} to="/schedulers">   All Scheduler      </Link>
            
             </Menu.Item>
-            <Menu.Item key="3" icon={<UploadOutlined />}>
-            <Link style={{textDecoration:"none"}}  to="/profile">   Profile      </Link>
+            <Menu.Item key="6" icon={<VideoCameraOutlined />}>
+                <Link style={{textDecoration:"none"}} to="/alluser">   List Of Users      </Link>
+           
             </Menu.Item>
+            <Menu.Item key="7" icon={<VideoCameraOutlined />}>
+                <Link style={{textDecoration:"none"}} to="/allemployee">   List Of Employee      </Link>
+           
+            </Menu.Item>
+            {/* <Menu.Item key="3" icon={<UploadOutlined />}>
+            <Link style={{textDecoration:"none"}}  to="/profile">   Profile      </Link>
+            </Menu.Item> */}
            
             <Menu.Item key="Register" onClick={showModal} icon={<AntDesignOutlined />}> 
          Register
