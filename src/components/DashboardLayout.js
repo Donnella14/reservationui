@@ -80,11 +80,11 @@ const DashboardLayout =({children})=> {
           <Menu   mode="inline" defaultSelectedKeys={['1']} className="menu">
           
             <Menu.Item key="1" class="nav-link active" aria-current="page" icon={<UserOutlined />}>
-                <Link style={{textDecoration:"none"}} to="/dashboard">   Sector      </Link>
+                <Link style={{textDecoration:"none"}} >   Sector      </Link>
               
             </Menu.Item>
            
-            <Menu.Item key="6" icon={<VideoCameraOutlined />}>
+            <Menu.Item key="6" icon={<VideoCameraOutlined />} >
                 <Link style={{textDecoration:"none"}} to="/appointments">   All Appointments      </Link>
            
             </Menu.Item>
@@ -100,14 +100,7 @@ const DashboardLayout =({children})=> {
                 <Link style={{textDecoration:"none"}} to="/allemployee">   List Of Employee      </Link>
            
             </Menu.Item>
-            {/* <Menu.Item key="3" icon={<UploadOutlined />}>
-            <Link style={{textDecoration:"none"}}  to="/profile">   Profile      </Link>
-            </Menu.Item> */}
-           
-            <Menu.Item key="Register" onClick={showModal} icon={<AntDesignOutlined />}> 
-         Register
-        </Menu.Item>
-          </Menu>
+           </Menu>
         </Sider>
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }}>

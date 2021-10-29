@@ -1,10 +1,8 @@
 import React,{useEffect, useState} from "react";
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 
 import SectorApi from "../services/SectorAuth";
 import Session from "../components/SectorCreation";
-import AuthApi from  "../services/Auth";
 import DashboardLayout from "../components/DashboardLayout";
 import dataFromToken from "../utils/tokenDecorder";
 import UserProfile from "../components/UserProfile";
@@ -50,12 +48,15 @@ const Dashboard = () => {
           dataIndex: 'sectorName',
           key: 'sectorName',
           render: text => <a>{text}</a>,
+          sorter: true,
+            width: '20%',
       },
       {
         title: 'EmployeeName',
         dataIndex: 'Employee',
         key: 'Employee',
-        
+        sorter: true,
+        width: '20%',
         render: Employee => <a>{Employee.firstName}  {Employee.lastName}</a>,
     
     },
@@ -63,17 +64,22 @@ const Dashboard = () => {
           title: 'Email',
           dataIndex: 'email',
           key: 'email',
+          sorter: true,
+            width: '20%',
       },
       {
           title: 'Phone Number',
           dataIndex: 'phone',
           key: 'phone',
+          sorter: true,
+            width: '20%',
       },
       {
           title: 'Address',
           key: 'address',
           dataIndex: 'address',
-         
+          sorter: true,
+          width: '20%',
       },
      
   ];
@@ -94,7 +100,7 @@ const Dashboard = () => {
       <>
           <DashboardLayout>
 
-           {dataFromToken(token).role=="user"? (<></>) : dataFromToken(token).role=="Employee"? (<></>): (<Button style={{backgroundColor:"#20c997"}} onClick={showModal}>Create Sector</Button>)} 
+           {/* {dataFromToken(token).role=="admin"? (<></>) : dataFromToken(token).role=="Employee"? (<></>): (<Button style={{backgroundColor:"#20c997"}} onClick={showModal}>Create Sector</Button>)}  */}
 
 <Table columns={columns} dataSource={data} />
 
