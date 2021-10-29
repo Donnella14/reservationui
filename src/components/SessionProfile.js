@@ -1,139 +1,96 @@
 import React from 'react';
-import {Divider, Col, Row} from "antd";
+import { Divider, Col, Row } from "antd";
 import "./index.css";
 
 const DescriptionItem = ({ title, content }) => (
-    <div className="site-description-item-profile-wrapper">
-      <p className="site-description-item-profile-p-label">{title}:</p>
-      {content}
-    </div>
-  );
-  
+  <div className="site-description-item-profile-wrapper">
+    <p className="site-description-item-profile-p-label">{title}:</p>
+    {content}
+  </div>
+);
 
-const SessionProfile= ({session}) => {
-    return(
-        <>
-        <p className="site-description-item-profile-p" style={{ marginBottom: 24 }}>
-        User Profile
+
+const SessionProfile = ({ session }) => {
+  return (
+    <>
+      <p className="main-heading" style={{ marginBottom: 24 }}>
+        USER PROFILE
       </p>
-      <p className="site-description-item-profile-p">Personal</p>
+      <h3 className="main-heading">PERSONAL INFORMATION</h3>
+    
       <Row>
         <Col span={12}>
           <DescriptionItem title="Full Name" content={session.user.firstName + " " + session.user.lastName} />
         </Col>
         <Col span={12}>
-          <DescriptionItem title="email" content={session.user.email} />
+          <DescriptionItem title="Email" content={session.user.email} />
         </Col>
       </Row>
       <Row>
         <Col span={12}>
-          <DescriptionItem title="phone" content={session.user.phone} />
+          <DescriptionItem title="Phone" content={session.user.phone} />
         </Col>
         <Col span={12}>
-          <DescriptionItem title="Gender" content={session.user.gender}/>
+          <DescriptionItem title="Gender" content={session.user.gender} />
         </Col>
+       
       </Row>
-      {/* <Row>
-        <Col span={12}>
-          <DescriptionItem title="Birthday" content="February 2,1900" />
-        </Col>
-        <Col span={12}>
-          <DescriptionItem title="Website" content="-" />
-        </Col>
-      </Row> */}
-      {/* <Row>
-        <Col span={24}>
-          <DescriptionItem
-            title="Message"
-            content="Make things as simple as possible but no simpler."
-          />
-        </Col>
-      </Row> */}
+
       <Divider />
-      {/* <p className="site-description-item-profile-p">Employee</p>
-
-
+      <h3 className="main-heading">EMPLOYEE INFORMATION</h3>
+   
       <Row>
         <Col span={12}>
-          <DescriptionItem title="Full Name" content={session.employee.firstName + " " + session.user.lastName} />
+          <DescriptionItem title="Full Name" content={session.Employee.firstName + " " + session.user.lastName} />
         </Col>
         <Col span={12}>
-          <DescriptionItem title="email" content={session.employee.email} />
+          <DescriptionItem title="Email" content={session.Employee.email} />
         </Col>
       </Row>
       <Row>
         <Col span={12}>
-          <DescriptionItem title="phone" content={session.employee.phone} />
+          <DescriptionItem title="Phone" content={session.Employee.phone} />
         </Col>
         <Col span={12}>
-          <DescriptionItem title="Gender" content={session.employee.gender}/>
+          <DescriptionItem title="Gender" content={session.Employee.gender} />
         </Col>
       </Row>
       <Row>
+       
         <Col span={12}>
-          <DescriptionItem title="Position" content="Programmer" />
-        </Col>
-        <Col span={12}>
-          <DescriptionItem title="Responsibilities" content="Coding" />
+          <DescriptionItem title="Responsibilities" content="Civil Marriage Approval" />
         </Col>
       </Row>
+    
+      <Divider />
+      <h3 className="main-heading">APPOINTMENT INFORMATION</h3>
+    
       <Row>
-        <Col span={12}>
-          <DescriptionItem title="Department" content="XTech" />
+         <Col span={12}>
+          <DescriptionItem title="Partner Name" content={session.partnerName} />
         </Col>
         <Col span={12}>
-          <DescriptionItem title="Supervisor" content={<a>Lin</a>} />
+          <DescriptionItem title="Narional Identity" content={session.partnerNationalId} />
         </Col>
+       
+       
       </Row>
       <Row>
-        <Col span={24}>
-          <DescriptionItem
-            title="Skills"
-            content="C / C + +, data structures, software engineering, operating systems, computer networks, databases, compiler theory, computer architecture, Microcomputer Principle and Interface Technology, Computer English, Java, ASP, etc."
-          />
-        </Col>
-      </Row>
-      <Divider /> */}
-      {/* <p className="site-description-item-profile-p">Session</p>
-      <Row>
-        <Col span={12}>
-          <DescriptionItem title="Title" content={session.title}/>
+      <Col span={12}>
+          <DescriptionItem title="Comment" content={session.Comment} />
         </Col>
         <Col span={12}>
           <DescriptionItem title="Status" content={session.status} />
         </Col>
       </Row>
-      <Row>
-        <Col span={12}>
-          <DescriptionItem title="Start on" content={session.timeToStart} />
-        </Col>
-        <Col span={12}>
-          <DescriptionItem title="End on" content={session.timeToEnd} />
-        </Col>
-      </Row>
 
-      <Row>
-        <Col span={24}>
-          <DescriptionItem
-            title="About Session"
-            content={session.description}
-          />
-        </Col>
-      </Row> */}
-      {/* <Row>
-        <Col span={24}>
-          <DescriptionItem
-            title="Github"
-            content={
-              <a href="http://github.com/ant-design/ant-design/">
-                github.com/ant-design/ant-design/
-              </a>
-            }
-          />
-        </Col>
-      </Row> */}
-      </>
-    )
+      
+
+      
+      
+
+    </>
+  )
 }
 
 export default SessionProfile;

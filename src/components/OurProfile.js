@@ -1,7 +1,6 @@
 import React from "react";
 import "./index.css";
 import { Card, Col, Row, Title, Subtitle, Body, Space } from "antd";
-//import ReactPlayer from 'react-player/lazy'
 
 import { Link } from "react-router-dom";
 import Slider from "../components/Slider";

@@ -14,20 +14,30 @@ const Header = () => {
 
   const onSearch = value => console.log(value);
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isSignInModalVisible, setIsSignInModalVisible] = useState(false);
+  const [isSignUpModalVisible, setIsSignUpModalVisible] = useState(false);
   const [token, setToken] = useState(null);
   const [dataFromToken, setDataFromToken] = useState({});
 
-  const showModal = () => {
-    setIsModalVisible(true);
+  const showSignInModal = () => {
+    setIsSignInModalVisible(true);
   };
-
+  const showSignUpModal = () => {
+    setIsSignUpModalVisible(true);
+  };
   const handleOk = () => {
-    setIsModalVisible(false);
+    setIsSignInModalVisible(false);
   };
 
   const handleCancel = () => {
-    setIsModalVisible(false);
+    setIsSignInModalVisible(false);
+  };
+  const handlOk = () => {
+    setIsSignUpModalVisible(false);
+  };
+
+  const handlCancel = () => {
+    setIsSignUpModalVisible(false);
   };
   const [current, setCurrent] = useState("home");
 
@@ -45,13 +55,18 @@ const Header = () => {
 
 
     <>
-      <Modal title="User Login" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+      <Modal title="User Login" visible={isSignInModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <div style={{ padding: "30px" }}>
           <SigninForm />
 
         </div>
       </Modal>
+      <Modal title="Registration Form" visible={isSignUpModalVisible} onOk={handlOk} onCancel={handlCancel}>
+        <div style={{ padding: "30px" }}>
+          <RegistrationForm />
 
+        </div>
+      </Modal>
       <nav class="navbar navbar-expand-lg navbar-light " style={{ backgroundColor: "#20c997" }}>
 
         <div class="container-fluid">
@@ -91,19 +106,24 @@ const Header = () => {
                 <Link class="nav-link " style={{ textDecoration: "none", color: "white" }} onClick={handleClick} to="/contact">CONTACTUS</Link>
               </li>
               {!token ?
-                (<li key="login" class="nav-item " style={{ textDecoration: "none", color: "white" }} onClick={showModal}>
-                  <Link class="nav-link " style={{ textDecoration: "none", color: "white" }} onClick={handleClick}> SIGNIN</Link>
+                (
+                  <>
+                    <li key="login" class="nav-item " style={{ textDecoration: "none", color: "white" }} onClick={showSignInModal}>
+                      <Link class="nav-link " style={{ textDecoration: "none", color: "white" }} > SIGNIN</Link>
 
-                </li>) :
+                    </li>
+                    <li class="nav-item" onClick={showSignUpModal}>
+                      <Link class="nav-link" onClick={handleClick} style={{ textDecoration: "none", color: "white" }}>SIGNUP</Link>
+                    </li>
+                  </>
+                ) :
                 (<li key="logout" class="nav-link " style={{ textDecoration: "none", color: "white" }} onClick={() => { localStorage.removeItem("civil_token") }}>
                   <Link style={{ textDecoration: "none" }} to="/home">SIGNOUT</Link>
 
                 </li>)}
 
 
-              <li class="nav-item" >
-                <Link to="/home" class="nav-link" style={{ textDecoration: "none", color: "white" }}>REGISTER</Link>
-              </li>
+
 
             </ul>
             <form class="d-flex">

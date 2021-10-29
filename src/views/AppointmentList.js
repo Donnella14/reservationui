@@ -9,7 +9,7 @@ import DashboardLayout from "../components/DashboardLayout";
 import dataFromToken from "../utils/tokenDecorder";
 
 import { Modal, Tag, Space, Button, Table, Drawer, notification } from 'antd';
-import { DeleteOutlined, EditOutlined, CloseSquareOutlined,CheckSquareOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, CloseSquareOutlined, CheckSquareOutlined } from '@ant-design/icons';
 
 import SessionProfile from "../components/SessionProfile";
 import { useHistory } from "react-router-dom";
@@ -53,6 +53,8 @@ const AppointmentList = () => {
             dataIndex: 'sector',
             key: 'sector',
             render: sector => <a>{sector.sectorName} </a>,
+            sorter: true,
+            width: '20%',
         },
 
         {
@@ -60,42 +62,49 @@ const AppointmentList = () => {
             dataIndex: 'Scheduler',
             key: 'Scheduler',
             render: Scheduler => <a>{Scheduler.services}</a>,
+            sorter: true,
+            width: '20%',
         },
         {
             title: 'Employee Name',
             dataIndex: 'Employee',
             key: 'Employee',
             render: Employee => <a>{Employee.firstName} {Employee.lastName}</a>,
+            sorter: true,
+            width: '20%',
         },
-        {
-            title: 'Comment',
-            dataIndex: 'Comment',
-            key: 'Comment',
-        },
+        // {
+        //     title: 'Comment',
+        //     dataIndex: 'Comment',
+        //     key: 'Comment',
+        // },
         {
             title: 'PartnerName',
             key: 'partnerName',
             dataIndex: 'partnerName',
+            sorter: true,
+            width: '20%',
 
         },
-        {
-            title: 'PartnerNationalId',
-            key: 'partnerNationalId',
-            dataIndex: 'partnerNationalId',
+        // {
+        //     title: 'PartnerNationalId',
+        //     key: 'partnerNationalId',
+        //     dataIndex: 'partnerNationalId',
 
-        },
+        // },
         {
             title: 'Registration Date',
             key: 'registeredOn',
             dataIndex: 'registeredOn',
-
+            sorter: true,
+            width: '20%',
         },
         {
             title: 'Status',
             key: 'status',
             dataIndex: 'status',
             render: tag => {
-                let color = tag === "pending" ? 'red' : tag === "decline" ? "#20c997" : "#422510";
+                let color = tag === "pending" ? '#422510' : tag === "decline" ? "red" : "#20c997";
                 return (
                     <Tag color={color} key={tag}>
                         {tag.toUpperCase()}
@@ -207,6 +216,7 @@ const AppointmentList = () => {
 
 
                     <Space size="middle">
+                        <a onClick={() => { setVisible(true); setSession(record) }}>View</a>
                         {dataFromToken(token).role == "Employee" ? (<>
 
                             <a onClick={() => { acceptAppointments(record._id) }} style={{ color: "green" }}><CheckSquareOutlined /></a>

@@ -51,6 +51,8 @@ const SchedulerList = () => {
           title: 'Services Name',
           dataIndex: 'services',
           key: 'services',
+          sorter: true,
+            width: '20%',
           render: text => <a>{text}</a>,
       },
      
@@ -58,6 +60,8 @@ const SchedulerList = () => {
           title: 'sectorName',
           dataIndex: 'sector',
           key: 'sector',
+          sorter: true,
+            width: '20%',
         render: sector => <a>{sector.sectorName} </a>,
       },
       
@@ -65,25 +69,29 @@ const SchedulerList = () => {
           title: 'Date',
           dataIndex: 'date',
           key: 'date',
+          sorter: true,
+            width: '20%',
       },
       {
           title: 'Time to Start',
           key: 'timeToStart',
           dataIndex: 'timeToStart',
-         
+          sorter: true,
+          width: '20%',
       },
       {
         title: 'Time to End',
         key: 'timeToEnd',
         dataIndex: 'timeToEnd',
-       
+        sorter: true,
+        width: '20%',
     },
     {
         title: 'Status',
         key: 'status',
         dataIndex: 'status',
         render: tag => {
-            let color = tag === "AVAILABLE" ? 'red' : tag === "BOOKED" ? "#20c997" : "#422510";
+            let color = tag === "AVAILABLE" ? '#422510' : tag === "BOOKED" ? "#20c997" : "red";
             return (
                 <Tag color={color} key={tag}>
                     {tag.toUpperCase()}
